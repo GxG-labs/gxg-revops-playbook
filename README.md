@@ -5,68 +5,68 @@
 
 # GxG RevOps Playbook
 
-**Коллекция скиллов для Claude, покрывающая весь стек Revenue Operations.**
+**A collection of Claude skills covering the full Revenue Operations stack.**
 
-Каждый скилл — это готовый workflow: запустил, получил результат.
-Не инструкции "как думать о RevOps" — а "как сделать прямо сейчас".
-
----
-
-## Зачем
-
-- ✅ **Скорость** — стандартные RevOps задачи решаются за один вызов скилла, без промпт-инжиниринга
-- ✅ **Единый стандарт** — все в команде работают по одному GxG-подходу
-- ✅ **Живая база знаний** — staging-область для доменного знания, которое ещё не стало скиллом
-- ✅ **Полный стек** — цель: 51 скилл в 10 доменах от pipeline до CS ops
+Each skill is a ready-to-run workflow: invoke it, get the result.
+Not instructions on how to think about RevOps — but how to execute right now.
 
 ---
 
-## Быстрый старт
+## Why
 
-**1.** Убедись что `gxg-revops-curator` активирован в твоём Claude.
+- ✅ **Speed** — standard RevOps tasks solved in a single skill call, no prompt engineering required
+- ✅ **Consistent standard** — everyone on the team works from the same GxG approach
+- ✅ **Living knowledge base** — staging area for domain knowledge that hasn't become a skill yet
+- ✅ **Full stack** — target: 51 skills across 10 domains from pipeline to CS ops
 
-**2.** Вызови любой скилл напрямую:
+---
+
+## Quick Start
+
+**1.** Make sure `gxg-revops-curator` is active in your Claude.
+
+**2.** Call any skill directly:
 ```
+/writing-business-cases
 /scoring-leads
 /forecasting-pipeline
-/auditing-crm-data
 ```
 
-**3.** Или попроси куратора найти нужное:
+**3.** Or ask the curator to find what you need:
 ```
-Нужен скилл для анализа churn — что есть в playbook?
+/gxg-revops-curator — I need a skill for churn analysis, what's in the playbook?
 ```
 
 ---
 
-## Что внутри
+## What's Inside
 
-| Домен | Скиллов | Coverage | Описание |
-|-------|---------|----------|---------|
-| [pipeline](./pipeline/) | 0/6 | 0% | Управление воронкой, прогнозирование, стейдж-менеджмент |
-| [demand-gen](./demand-gen/) | 0/5 | 0% | ICP, лид-скоринг, MQL/SQL-критерии, ABM |
-| [sales-enablement](./sales-enablement/) | 1/7 | 14% | Плейбуки, battle cards, работа с возражениями |
-| [crm-ops](./crm-ops/) | 0/6 | 0% | Salesforce/HubSpot, качество данных, автоматизация |
-| [rev-analytics](./rev-analytics/) | 0/5 | 0% | KPI, атрибуция, дашборды, ARR/NRR/GRR |
-| [cs-ops](./cs-ops/) | 0/5 | 0% | Health scoring, QBR, retention, expansion |
-| [rev-tech](./rev-tech/) | 0/4 | 0% | Стек инструментов, интеграции, vendor eval |
-| [pricing-packaging](./pricing-packaging/) | 0/4 | 0% | CPQ, тиры, deal desk, discount governance |
-| [territory-quota](./territory-quota/) | 0/4 | 0% | Territories, квоты, ramp планы, компенсация |
+| Domain | Skills | Coverage | Description |
+|--------|--------|----------|-------------|
+| [pipeline](./pipeline/) | 0/6 | 0% | Pipeline management, forecasting, stage hygiene |
+| [demand-gen](./demand-gen/) | 0/5 | 0% | ICP, lead scoring, MQL/SQL criteria, ABM |
+| [sales-enablement](./sales-enablement/) | 1/7 | 14% | Playbooks, battle cards, objection handling |
+| [crm-ops](./crm-ops/) | 0/6 | 0% | Salesforce/HubSpot, data quality, automation |
+| [rev-analytics](./rev-analytics/) | 0/5 | 0% | KPIs, attribution, dashboards, ARR/NRR/GRR |
+| [cs-ops](./cs-ops/) | 0/5 | 0% | Health scoring, QBRs, retention, expansion |
+| [rev-tech](./rev-tech/) | 0/4 | 0% | Tool evaluation, integrations, vendor management |
+| [pricing-packaging](./pricing-packaging/) | 0/4 | 0% | CPQ, tiers, deal desk, discount governance |
+| [territory-quota](./territory-quota/) | 0/4 | 0% | Territories, quotas, ramp plans, compensation |
 | [mktg-ops](./mktg-ops/) | 0/5 | 0% | Campaign ops, automation, lead routing |
-| **Итого** | **1/51** | **2%** | |
+| **Total** | **1/51** | **2%** | |
 
 ---
 
-## Структура репо
+## Repo Structure
 
 ```
 GxG RevOps Playbook/
-├── README.md               ← здесь
-├── INDEX.md                ← полный реестр всех скиллов
-├── CONTRIBUTING.md         ← как добавить/улучшить скилл
-├── _staging/               ← сырое знание → будущие скиллы
+├── README.md               ← you are here
+├── INDEX.md                ← full registry of all skills
+├── CONTRIBUTING.md         ← how to add or improve a skill
+├── _staging/               ← raw knowledge → future skills
 ├── .claude/skills/
-│   └── gxg-revops-curator/ ← мета-скилл для ведения этого репо
+│   └── gxg-revops-curator/ ← meta-skill for maintaining this repo
 ├── pipeline/
 ├── demand-gen/
 ├── sales-enablement/
@@ -81,35 +81,35 @@ GxG RevOps Playbook/
 
 ---
 
-## Добавить скилл или знание
+## Adding a Skill or Knowledge
 
-**Быстро — добавь в staging** (займёт 2 минуты):
+**Quick — add to staging** (2 minutes):
 ```
-/gxg-revops-curator — добавь в staging: [опиши что знаешь]
+/gxg-revops-curator — add to staging: [describe what you know]
 ```
 
-**Полноценный скилл** — см. [CONTRIBUTING.md](./CONTRIBUTING.md).
+**Full skill** — see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-Куратор поможет с таксономией, шаблоном и quality gates:
+The curator helps with taxonomy, scaffolding, and quality gates:
 ```
-/gxg-revops-curator — хочу написать скилл для X
+/gxg-revops-curator — I want to write a skill for X
 ```
 
 ---
 
-## Аудит и здоровье коллекции
+## Auditing the Collection
 
 ```bash
-# Полный аудит: скиллы + staging
+# Full audit: skills + staging
 python .claude/skills/gxg-revops-curator/scripts/audit.py --root .
 
-# Только staging
+# Staging only
 python .claude/skills/gxg-revops-curator/scripts/audit.py --root . --staging-only
 
-# Конкретный домен
+# Specific domain
 python .claude/skills/gxg-revops-curator/scripts/audit.py --root . --domain pipeline
 ```
 
 ---
 
-*Поддерживается `gxg-revops-curator` · Обновлено June 2026*
+*Maintained by `gxg-revops-curator` · Updated June 2026*
