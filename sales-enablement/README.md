@@ -10,7 +10,7 @@
 
 | Skill | Status | Score | Tags | Last Updated |
 |-------|--------|-------|------|-------------|
-| *(no skills yet)* | | | | |
+| [writing-business-cases](writing-business-cases/SKILL.md) | active | — | #template #playbook #framework #p1 | 2026-06-09 |
 
 ---
 

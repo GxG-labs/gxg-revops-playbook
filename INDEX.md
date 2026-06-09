@@ -2,9 +2,9 @@
 
 > **Auto-maintained by `gxg-revops-curator` skill.** Run `/gxg-revops-curator` and say "update index" to refresh.
 
-**Last updated:** —
-**Total skills:** 0 active / 51 target
-**Overall coverage:** 0%
+**Last updated:** 2026-06-09
+**Total skills:** 1 active / 51 target
+**Overall coverage:** 2%
 
 ---
 
@@ -14,7 +14,7 @@
 |--------|--------|--------|----------|
 | [pipeline](#pipeline) | 0 | 6 | 0% |
 | [demand-gen](#demand-gen) | 0 | 5 | 0% |
-| [sales-enablement](#sales-enablement) | 0 | 7 | 0% |
+| [sales-enablement](#sales-enablement) | 1 | 7 | 14% |
 | [crm-ops](#crm-ops) | 0 | 6 | 0% |
 | [rev-analytics](#rev-analytics) | 0 | 5 | 0% |
 | [cs-ops](#cs-ops) | 0 | 5 | 0% |
@@ -22,7 +22,7 @@
 | [pricing-packaging](#pricing-packaging) | 0 | 4 | 0% |
 | [territory-quota](#territory-quota) | 0 | 4 | 0% |
 | [mktg-ops](#mktg-ops) | 0 | 5 | 0% |
-| **TOTAL** | **0** | **51** | **0%** |
+| **TOTAL** | **1** | **51** | **2%** |
 
 ---
 
@@ -52,7 +52,7 @@
 
 | Skill | Status | Tags | Description |
 |-------|--------|------|-------------|
-| *(no active skills yet)* | | | |
+| [writing-business-cases](sales-enablement/writing-business-cases/SKILL.md) | active | #template #playbook #framework #p1 | Produces B2B business cases in a four-level pyramid — one-line, paragraph, slide, and full web-page versions |
 
 ---
 
