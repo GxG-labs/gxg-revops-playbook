@@ -87,6 +87,8 @@ SKILL.md маршрутизирует сюда при staging-запросах.
 6. Сохранить скилл в `{domain}/{slug}/SKILL.md` со статусом `draft`
 7. Переместить staging-заметку: добавить в фронтматтер `promoted_to: {domain}/{slug}` и `status: promoted`
 8. Обновить INDEX.md
+9. **README freshness check** ← автоматически после promote
+   Скилл стал active — запусти §README Freshness Check из lifecycle.md.
 
 ---
 

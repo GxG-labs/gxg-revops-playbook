@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevOps Domain Tree — Marketing & Sales</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    max-width: 860px; margin: 2.5rem auto; padding: 0 1.25rem;
+    color: #111827; background: #fff; line-height: 1.5;
+  }
+  h1 { font-size: 1.4rem; font-weight: 700; margin: 0 0 0.2rem; }
+  .meta { color: #6b7280; font-size: 0.8rem; margin-bottom: 1.5rem; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  ul.root > li { margin-bottom: 0.75rem; }
+  .subdomains { padding-left: 1.5rem; margin-top: 0.25rem; }
+  .node { margin: 0.25rem 0; }
+  details {
+    border-left: 2px solid #e5e7eb;
+    padding-left: 0.875rem;
+  }
+  details[open] { border-left-color: #6366f1; }
+  .level-0 > details { border-left-width: 3px; }
+  summary {
+    cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.3rem 0; user-select: none; list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "▶"; font-size: 0.55rem; color: #9ca3af;
+    flex-shrink: 0; transition: transform 0.12s ease; margin-top: 1px;
+  }
+  details[open] > summary::before { transform: rotate(90deg); }
+  .name { font-weight: 600; font-size: 0.92rem; }
+  .level-0 > details > summary .name { font-size: 1.02rem; }
+  .id {
+    background: #f3f4f6; color: #4f46e5;
+    font-size: 0.72rem; font-family: "SFMono-Regular", Consolas, monospace;
+    padding: 0.1rem 0.45rem; border-radius: 4px; letter-spacing: 0.01em;
+  }
+  .count {
+    margin-left: auto; font-size: 0.72rem; color: #9ca3af;
+    background: #f9fafb; border: 1px solid #e5e7eb;
+    padding: 0.05rem 0.4rem; border-radius: 10px;
+  }
+  .desc {
+    color: #6b7280; font-size: 0.83rem; margin: 0.15rem 0 0.5rem;
+    padding-left: 0.1rem; max-width: 680px;
+  }
+  .issues {
+    list-style: none; padding: 0.75rem 1rem; margin: 0 0 1.5rem;
+    background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px;
+    font-size: 0.8rem;
+  }
+  .issue-err  { color: #b91c1c; }
+  .issue-warn { color: #92400e; }
+  .issues li + li { margin-top: 0.3rem; }
+</style>
+</head>
+<body>
+<h1>RevOps Domain Tree — Marketing & Sales</h1>
+<div class="meta">v1 · updated 2026-06-10</div>
+
+<ul class="root">
+
+<li class="node level-0">
+  <details open>
+    <summary>
+      <span class="name">Demand Generation</span>
+      <code class="id">demand_gen</code>
+      <span class="count">12</span>
+    </summary>
+    <p class='desc'>Все активности по привлечению и конвертации лидов — inbound и outbound.</p>
+    <ul class="subdomains">
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Inbound Marketing</span>
+      <code class="id">inbound_marketing</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Привлечение через контент, SEO, органику и brand awareness.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">SEO & Organic</span>
+      <code class="id">seo_organic</code>
+      
+    </summary>
+    <p class='desc'>Оптимизация под поисковый спрос, органический трафик и ссылочная масса.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Brand & Awareness</span>
+      <code class="id">brand_awareness</code>
+      
+    </summary>
+    <p class='desc'>Позиционирование, PR, community building и thought leadership.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Events & Webinars</span>
+      <code class="id">events_webinars</code>
+      
+    </summary>
+    <p class='desc'>Онлайн и офлайн мероприятия как канал лидогенерации и прогрева.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Outbound Prospecting</span>
+      <code class="id">outbound</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Исходящий поиск и квалификация потенциальных клиентов.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Cold Outreach</span>
+      <code class="id">cold_outreach</code>
+      
+    </summary>
+    <p class='desc'>Email, LinkedIn и мультиканальные холодные последовательности.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Account-Based Marketing</span>
+      <code class="id">abm</code>
+      
+    </summary>
+    <p class='desc'>Персонализированные кампании на целевые аккаунты (1:1, 1:few, 1:many).</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Signal-Based Prospecting</span>
+      <code class="id">signal_prospecting</code>
+      
+    </summary>
+    <p class='desc'>Триггерный аутрич на основе intent-сигналов и data-enrichment.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Paid Acquisition</span>
+      <code class="id">paid_acquisition</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Платные каналы привлечения — paid social, PPC, influence, affiliate.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Paid Social</span>
+      <code class="id">paid_social</code>
+      
+    </summary>
+    <p class='desc'>Таргетированная реклама в LinkedIn, Meta, YouTube и других соцсетях.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">PPC & SEM</span>
+      <code class="id">ppc_sem</code>
+      
+    </summary>
+    <p class='desc'>Контекстная и поисковая реклама Google, Bing и аналогов.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Influencer & Affiliate</span>
+      <code class="id">influencer_affiliate</code>
+      
+    </summary>
+    <p class='desc'>Партнёрский маркетинг через блогеров, KOL и аффилиатов.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-0">
+  <details open>
+    <summary>
+      <span class="name">Content Operations</span>
+      <code class="id">content_ops</code>
+      <span class="count">9</span>
+    </summary>
+    <p class='desc'>Создание, управление и дистрибуция контента как канала роста и доверия.</p>
+    <ul class="subdomains">
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Content Strategy</span>
+      <code class="id">content_strategy</code>
+      
+    </summary>
+    <p class='desc'>ICP-based планирование тем, форматов, editorial calendar и контент-воронки.</p>
+    
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Content Creation</span>
+      <code class="id">content_creation</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Производство текста, видео, подкастов и визуального контента.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Written Content</span>
+      <code class="id">written_content</code>
+      
+    </summary>
+    <p class='desc'>Статьи, кейсы, white papers, thought leadership и long-form SEO.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Video & Audio</span>
+      <code class="id">video_audio</code>
+      
+    </summary>
+    <p class='desc'>Видеоролики, подкасты, вебинары, short-form видео (reels, shorts).</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Social Media Content</span>
+      <code class="id">social_content</code>
+      
+    </summary>
+    <p class='desc'>Posts, threads, carousels, stories — адаптация под форматы соцсетей.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Content Distribution</span>
+      <code class="id">content_distribution</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Каналы публикации, продвижения и переупаковки готового контента.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Email & Newsletter</span>
+      <code class="id">email_newsletter</code>
+      
+    </summary>
+    <p class='desc'>Рассылки, nurture-последовательности, newsletter как owned media.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Social Channels</span>
+      <code class="id">social_channels</code>
+      
+    </summary>
+    <p class='desc'>Публикации и органический рост в LinkedIn, X, Instagram и других.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Syndication & Repurpose</span>
+      <code class="id">syndication_repurpose</code>
+      
+    </summary>
+    <p class='desc'>Переупаковка контента, репосты, guest posting, content atomization.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-0">
+  <details open>
+    <summary>
+      <span class="name">Sales</span>
+      <code class="id">sales</code>
+      <span class="count">12</span>
+    </summary>
+    <p class='desc'>Все процессы превращения лидов в клиентов — от первого касания до закрытия.</p>
+    <ul class="subdomains">
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Sales Development (SDR)</span>
+      <code class="id">sales_development</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Квалификация лидов и выход на ЛПР — outbound и inbound SDR.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Lead Qualification</span>
+      <code class="id">lead_qualification</code>
+      
+    </summary>
+    <p class='desc'>ICP-скоринг, BANT/MEDDIC-фреймворки, квалификация входящих заявок.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Outreach Sequences</span>
+      <code class="id">outreach_sequences</code>
+      
+    </summary>
+    <p class='desc'>Мультиканальные последовательности касаний для назначения встреч.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">AI Personalization</span>
+      <code class="id">personalization</code>
+      
+    </summary>
+    <p class='desc'>Гиперперсонализация сообщений с помощью AI и data-enrichment.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Pipeline Management</span>
+      <code class="id">pipeline_management</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Ведение сделок от первой встречи до подписания контракта.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Deal Management</span>
+      <code class="id">deal_management</code>
+      
+    </summary>
+    <p class='desc'>Прогресс по стадиям воронки, работа с возражениями, stakeholder-карты.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Sales Forecasting</span>
+      <code class="id">forecasting</code>
+      
+    </summary>
+    <p class='desc'>Точность прогнозов, pipeline hygiene, commit vs. best case.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">CRM Management</span>
+      <code class="id">crm_management</code>
+      
+    </summary>
+    <p class='desc'>Дисциплина ведения CRM, чистота данных, автоматизация записей.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Sales Enablement</span>
+      <code class="id">sales_enablement</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Всё, что помогает продавцам продавать быстрее и с более высоким win rate.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Sales Content</span>
+      <code class="id">sales_content</code>
+      
+    </summary>
+    <p class='desc'>Deck, battle cards, case studies, ROI-калькуляторы, demo-материалы.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Playbooks & Training</span>
+      <code class="id">playbooks_training</code>
+      
+    </summary>
+    <p class='desc'>Сценарии разговоров, objection handling, onboarding продавцов.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Sales Tools & Stack</span>
+      <code class="id">sales_tools</code>
+      
+    </summary>
+    <p class='desc'>Инструменты продавца — диалер, email-трекинг, intent-data, AI-копилоты.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-0">
+  <details open>
+    <summary>
+      <span class="name">Growth Marketing</span>
+      <code class="id">growth_marketing</code>
+      <span class="count">8</span>
+    </summary>
+    <p class='desc'>Конверсия, удержание и механики роста — эксперименты и lifecycle marketing.</p>
+    <ul class="subdomains">
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Conversion Optimization</span>
+      <code class="id">conversion_optimization</code>
+      
+    </summary>
+    <p class='desc'>CRO, A/B тесты, landing page оптимизация, улучшение форм и CTA.</p>
+    
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Lifecycle & Retention</span>
+      <code class="id">lifecycle_marketing</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Onboarding, nurturing, upsell — работа с текущей пользовательской базой.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Email Automation</span>
+      <code class="id">email_automation</code>
+      
+    </summary>
+    <p class='desc'>Триггерные цепочки, behavioural emails, life-cycle sequences.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Product-Led Growth</span>
+      <code class="id">product_led_growth</code>
+      
+    </summary>
+    <p class='desc'>Virality loops, freemium, self-serve онбординг и in-product activation.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Customer Expansion</span>
+      <code class="id">customer_expansion</code>
+      
+    </summary>
+    <p class='desc'>Upsell, cross-sell, referral программы и community-led growth.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Analytics & Attribution</span>
+      <code class="id">analytics_attribution</code>
+      <span class="count">2</span>
+    </summary>
+    <p class='desc'>Измерение эффективности каналов, атрибуция выручки и growth-метрики.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Web Analytics</span>
+      <code class="id">web_analytics</code>
+      
+    </summary>
+    <p class='desc'>GA4, heatmaps, session recording, funnel analysis, UTM-трекинг.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Revenue Attribution</span>
+      <code class="id">revenue_attribution</code>
+      
+    </summary>
+    <p class='desc'>Multi-touch attribution, source tracking, CAC и ROI по каналам.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-0">
+  <details open>
+    <summary>
+      <span class="name">Revenue Operations</span>
+      <code class="id">revenue_ops</code>
+      <span class="count">12</span>
+    </summary>
+    <p class='desc'>Операционный хребет GTM — данные, процессы, автоматизация и технологический стек.</p>
+    <ul class="subdomains">
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">GTM Operations</span>
+      <code class="id">gtm_ops</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Процессы и операционная модель go-to-market функций.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Lead Routing & SLA</span>
+      <code class="id">lead_routing</code>
+      
+    </summary>
+    <p class='desc'>Правила маршрутизации лидов, SLA, handoff маркетинг → продажи.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Territory & Quota Planning</span>
+      <code class="id">territory_planning</code>
+      
+    </summary>
+    <p class='desc'>Сегментация рынка, распределение территорий, постановка планов продаж.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">GTM Strategy</span>
+      <code class="id">go_to_market_strategy</code>
+      
+    </summary>
+    <p class='desc'>ICP, positioning, messaging, GTM-motion (PLG, sales-led, hybrid, channel).</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Data & Intelligence</span>
+      <code class="id">data_intelligence</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Качество данных, enrichment, revenue intelligence и market insights.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Data Enrichment</span>
+      <code class="id">data_enrichment</code>
+      
+    </summary>
+    <p class='desc'>Обогащение контактов и аккаунтов — technographic, firmographic, intent.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Revenue Intelligence</span>
+      <code class="id">revenue_intelligence</code>
+      
+    </summary>
+    <p class='desc'>Conversation intelligence, deal scoring, pipeline risk AI.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Market Intelligence</span>
+      <code class="id">market_intelligence</code>
+      
+    </summary>
+    <p class='desc'>Конкурентный анализ, ICP-исследование, trends и win/loss анализ.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li>
+
+<li class="node level-1">
+  <details>
+    <summary>
+      <span class="name">Tech Stack & Automation</span>
+      <code class="id">tech_stack</code>
+      <span class="count">3</span>
+    </summary>
+    <p class='desc'>Маркетинговый и продажный стек — инструменты, интеграции, AI-автоматизация.</p>
+    <ul class="subdomains">
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">CRM Platform</span>
+      <code class="id">crm_platform</code>
+      
+    </summary>
+    <p class='desc'>Выбор, настройка и оптимизация CRM (Salesforce, HubSpot, Pipedrive и др.).</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">Marketing Automation</span>
+      <code class="id">marketing_automation</code>
+      
+    </summary>
+    <p class='desc'>MAP-системы, workflow automation, lead scoring, nurture-программы.</p>
+    
+  </details>
+</li>
+
+<li class="node level-2">
+  <details>
+    <summary>
+      <span class="name">AI & Workflow Automation</span>
+      <code class="id">ai_automation</code>
+      
+    </summary>
+    <p class='desc'>AI-агенты, no-code автоматизации и интеграции в GTM-процессах.</p>
+    
+  </details>
+</li></ul>
+  </details>
+</li></ul>
+  </details>
+</li>
+</ul>
+</body>
+</html>

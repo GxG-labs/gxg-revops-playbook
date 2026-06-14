@@ -3,6 +3,9 @@
 GxG RevOps Playbook — Audit Script
 Scans all SKILL.md files, scores against G1–G7 gates, outputs report.
 
+Config is read from .skills/config.yaml (relative to --root). Falls back to
+built-in defaults if the file is not present.
+
 Usage:
     python audit.py [--root PATH] [--domain DOMAIN] [--json]
 
@@ -20,9 +23,9 @@ import argparse
 from datetime import datetime, date
 from pathlib import Path
 
-# ─── Config ───────────────────────────────────────────────────────────────────
+# ─── Config (defaults — overridden by .skills/config.yaml) ────────────────────
 
-COVERAGE_TARGETS = {
+_DEFAULT_COVERAGE_TARGETS = {
     "pipeline": 6,
     "demand-gen": 5,
     "sales-enablement": 7,
@@ -35,14 +38,94 @@ COVERAGE_TARGETS = {
     "mktg-ops": 5,
 }
 
-STALE_THRESHOLD_DAYS = 90
-MAX_SKILL_LINES = 500
-MAX_DESCRIPTION_CHARS = 1024
+_DEFAULT_SETTINGS = {
+    "stale_threshold_days": 90,
+    "max_skill_lines": 500,
+    "max_description_chars": 1024,
+    "staging_ready_warning_days": 30,
+    "staging_parked_warning_days": 90,
+    "staging_raw_warning_days": 14,
+    "staging_max_total": 20,
+    "staging_max_ready": 5,
+}
+
+
+def load_config(root: Path) -> tuple[dict, dict]:
+    """
+    Load domain targets and settings from .skills/config.yaml.
+    Returns (coverage_targets, settings). Falls back to defaults if YAML
+    is unavailable or the file doesn't exist.
+    """
+    config_path = root / ".skills" / "config.yaml"
+    if not config_path.exists():
+        return _DEFAULT_COVERAGE_TARGETS.copy(), _DEFAULT_SETTINGS.copy()
+
+    try:
+        import yaml  # type: ignore
+        raw = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    except ImportError:
+        # PyYAML not installed — parse manually (simple key: value only)
+        raw = _parse_simple_yaml(config_path)
+    except Exception:
+        return _DEFAULT_COVERAGE_TARGETS.copy(), _DEFAULT_SETTINGS.copy()
+
+    coverage_targets = {}
+    for domain_key, domain_data in raw.get("domains", {}).items():
+        if isinstance(domain_data, dict):
+            target = domain_data.get("target_skills") or domain_data.get("target") or 0
+            coverage_targets[domain_key] = int(target)
+
+    settings = _DEFAULT_SETTINGS.copy()
+    for k, v in raw.get("settings", {}).items():
+        if k in settings:
+            settings[k] = int(v)
+
+    return coverage_targets or _DEFAULT_COVERAGE_TARGETS.copy(), settings
+
+
+def _parse_simple_yaml(path: Path) -> dict:
+    """Minimal YAML parser for the config file when PyYAML is unavailable."""
+    result: dict = {}
+    stack: list = [result]
+    indent_stack: list = [-1]
+    current_key: list[str] = []
+
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.strip().startswith("#"):
+            continue
+        stripped = line.lstrip()
+        indent = len(line) - len(stripped)
+        if ":" in stripped:
+            key, _, val = stripped.partition(":")
+            key = key.strip()
+            val = val.strip().strip('"').strip("'")
+            while indent_stack and indent <= indent_stack[-1]:
+                indent_stack.pop()
+                stack.pop()
+                current_key.pop() if current_key else None
+            if val:
+                stack[-1][key] = val
+            else:
+                new_dict: dict = {}
+                stack[-1][key] = new_dict
+                stack.append(new_dict)
+                indent_stack.append(indent)
+                current_key.append(key)
+    return result
+
+
+# ─── Runtime config (populated in main) ───────────────────────────────────────
+
+COVERAGE_TARGETS: dict[str, int] = _DEFAULT_COVERAGE_TARGETS.copy()
+SETTINGS: dict = _DEFAULT_SETTINGS.copy()
+
+STALE_THRESHOLD_DAYS = SETTINGS["stale_threshold_days"]
+MAX_SKILL_LINES = SETTINGS["max_skill_lines"]
+MAX_DESCRIPTION_CHARS = SETTINGS["max_description_chars"]
 MIN_TRIGGER_KEYWORDS = 5
 MIN_EXAMPLES = 2
 
 REQUIRED_FRONTMATTER = {"name", "description", "status", "domain", "tags", "version", "updated", "author"}
-
 VALID_STATUSES = {"draft", "review", "needs-work", "active", "deprecated", "archived"}
 
 SKILL_SCORE_LABELS = {
@@ -75,7 +158,6 @@ def parse_frontmatter(content: str) -> dict:
 
 
 def count_examples(content: str) -> int:
-    """Count '### Example' headings in skill body."""
     return len(re.findall(r"^### Example", content, re.MULTILINE))
 
 
@@ -84,7 +166,6 @@ def has_out_of_scope(content: str) -> bool:
 
 
 def count_trigger_keywords(description: str) -> int:
-    """Count quoted trigger keywords in description."""
     return len(re.findall(r'"[^"]{2,}"', description))
 
 
@@ -102,18 +183,15 @@ def days_since_update(updated_str: str) -> int | None:
 # ─── Gate Checks ──────────────────────────────────────────────────────────────
 
 def check_gates(skill_path: Path, content: str, fm: dict) -> dict:
-    """Run G1–G7 and return gate results."""
     name = fm.get("name", "")
     description = fm.get("description", "")
     lines = content.splitlines()
 
     gates = {}
 
-    # G1 — Name: kebab-case, verb+noun/gerund pattern, ≤64 chars
     g1 = bool(re.match(r"^[a-z][a-z0-9-]{1,62}[a-z0-9]$", name)) and len(name) <= 64
     gates["G1"] = {"pass": g1, "detail": f"name='{name}' {'OK' if g1 else 'FAIL: not kebab-case or too long'}"}
 
-    # G2 — Description: third-person, USE WHEN, ≥5 trigger keywords, ≤1024 chars
     has_use_when = "use when" in description.lower()
     kw_count = count_trigger_keywords(description)
     third_person = is_third_person(description)
@@ -125,26 +203,21 @@ def check_gates(skill_path: Path, content: str, fm: dict) -> dict:
                   f"third-person={'✓' if third_person else '✗'} | chars={desc_len}/{MAX_DESCRIPTION_CHARS}"
     }
 
-    # G3 — Body ≤500 lines
     g3 = len(lines) <= MAX_SKILL_LINES
     gates["G3"] = {"pass": g3, "detail": f"{len(lines)} lines (max {MAX_SKILL_LINES})"}
 
-    # G4 — ≥2 concrete examples
     example_count = count_examples(content)
     g4 = example_count >= MIN_EXAMPLES
     gates["G4"] = {"pass": g4, "detail": f"{example_count} examples found (min {MIN_EXAMPLES})"}
 
-    # G5 — Out of scope section
     g5 = has_out_of_scope(content)
     gates["G5"] = {"pass": g5, "detail": "'Out of scope' section " + ("found" if g5 else "MISSING")}
 
-    # G6 — domain + tags in frontmatter
     has_domain = "domain" in fm and fm["domain"] in COVERAGE_TARGETS
     has_tags = "tags" in fm and len(fm["tags"]) > 2
     g6 = has_domain and has_tags
     gates["G6"] = {"pass": g6, "detail": f"domain={'✓' if has_domain else '✗'} | tags={'✓' if has_tags else '✗'}"}
 
-    # G7 — required frontmatter fields
     missing = REQUIRED_FRONTMATTER - set(fm.keys())
     g7 = len(missing) == 0
     gates["G7"] = {"pass": g7, "detail": f"missing fields: {missing if missing else 'none'}"}
@@ -158,10 +231,9 @@ def scan_playbook(root: Path, domain_filter: str | None = None) -> list[dict]:
     results = []
 
     for skill_md in sorted(root.rglob("SKILL.md")):
-        # Skip the curator's own SKILL.md
-        if ".claude" in skill_md.parts:
+        # Skip curator adapter and shared skill content
+        if ".claude" in skill_md.parts or ".skills" in skill_md.parts:
             continue
-        # Domain filter
         parts = skill_md.relative_to(root).parts
         if not parts:
             continue
@@ -197,11 +269,11 @@ def scan_playbook(root: Path, domain_filter: str | None = None) -> list[dict]:
 
 def print_report(results: list[dict], root: Path):
     total = len(results)
-    by_status = {}
+    by_status: dict = {}
     for r in results:
         by_status.setdefault(r["status"], []).append(r)
 
-    by_domain = {}
+    by_domain: dict = {}
     for r in results:
         by_domain.setdefault(r["domain"], []).append(r)
 
@@ -237,10 +309,10 @@ def print_report(results: list[dict], root: Path):
         print(f"  {domain:<22} {n_active:>6} {n_draft:>6} {target:>6}  {cov:>6} {flag}")
 
     print("\nQUALITY BREAKDOWN")
-    exemplary = [r for r in results if r["score"] == 7]
-    good      = [r for r in results if r["score"] in (5, 6)]
-    needs_work= [r for r in results if r["score"] in (3, 4)]
-    critical  = [r for r in results if r["score"] <= 2]
+    exemplary  = [r for r in results if r["score"] == 7]
+    good       = [r for r in results if r["score"] in (5, 6)]
+    needs_work = [r for r in results if r["score"] in (3, 4)]
+    critical   = [r for r in results if r["score"] <= 2]
 
     for label, group in [("✅ Exemplary (7/7)", exemplary), ("⚠️  Good (5-6/7)", good),
                           ("🔧 Needs Work (3-4/7)", needs_work), ("🚫 Critical (≤2/7)", critical)]:
@@ -261,76 +333,51 @@ def print_report(results: list[dict], root: Path):
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
-def main():
-    parser = argparse.ArgumentParser(description="Audit GxG RevOps Playbook skills")
-    parser.add_argument("--root", default=".", help="Playbook root directory")
-    parser.add_argument("--domain", help="Filter to a specific domain")
-    parser.add_argument("--json", action="store_true", help="Output as JSON")
-    args = parser.parse_args()
-
-    root = Path(args.root).resolve()
-    if not root.exists():
-        print(f"ERROR: root path not found: {root}", file=sys.stderr)
-        sys.exit(1)
-
-    results = scan_playbook(root, domain_filter=args.domain)
-
-    if not results:
-        print("No skills found. Is the --root path correct?")
-        sys.exit(0)
-
-    if args.json:
-        print(json.dumps(results, indent=2, default=str))
-    else:
-        print_report(results, root)
-
-
-if __name__ == "__main__":
-    main()
+def _init_config(root: Path):
+    """Load config from .skills/config.yaml and update module-level variables."""
+    global COVERAGE_TARGETS, SETTINGS, STALE_THRESHOLD_DAYS, MAX_SKILL_LINES, MAX_DESCRIPTION_CHARS
+    COVERAGE_TARGETS, SETTINGS = load_config(root)
+    STALE_THRESHOLD_DAYS = SETTINGS["stale_threshold_days"]
+    MAX_SKILL_LINES = SETTINGS["max_skill_lines"]
+    MAX_DESCRIPTION_CHARS = SETTINGS["max_description_chars"]
 
 
 # ─── README Freshness ─────────────────────────────────────────────────────────
 
 def check_readme_freshness(root: Path) -> dict:
-    """
-    Compare README.md badge counts against actual playbook state.
-    Returns a dict with: stale (bool), old_count, new_count, old_pct, new_pct, message.
-    """
     readme = root / "README.md"
     if not readme.exists():
         return {"stale": False, "message": "README.md not found"}
 
     content = readme.read_text(encoding="utf-8")
 
-    # Parse badge values
     skill_match = re.search(r"skills-(\d+)%20active", content)
     cov_match   = re.search(r"coverage-(\d+)%25", content)
     badge_count = int(skill_match.group(1)) if skill_match else None
     badge_pct   = int(cov_match.group(1))   if cov_match  else None
 
-    # Actual counts
     actual_active = 0
     for sm in root.rglob("SKILL.md"):
-        if ".claude" in sm.parts:
+        if ".claude" in sm.parts or ".skills" in sm.parts:
             continue
         fm = parse_frontmatter(sm.read_text(encoding="utf-8"))
         if fm.get("status") == "active":
             actual_active += 1
 
     total_target = sum(COVERAGE_TARGETS.values())
-    actual_pct = round(actual_active / total_target * 100)
+    actual_pct = round(actual_active / total_target * 100) if total_target else 0
 
     stale = (badge_count != actual_active) or (badge_pct != actual_pct)
 
     msg = ""
     if stale:
-        parts = []
+        parts_changed = []
         if badge_count != actual_active:
-            parts.append(f"skills {badge_count}→{actual_active}")
+            parts_changed.append(f"skills {badge_count}→{actual_active}")
         if badge_pct != actual_pct:
-            parts.append(f"coverage {badge_pct}%→{actual_pct}%")
-        msg = f"📋 README устарел ({', '.join(parts)}). Обновить?"
-    
+            parts_changed.append(f"coverage {badge_pct}%→{actual_pct}%")
+        msg = f"📋 README is stale ({', '.join(parts_changed)}). Update?"
+
     return {
         "stale": stale,
         "badge_count": badge_count,
@@ -342,10 +389,6 @@ def check_readme_freshness(root: Path) -> dict:
 
 
 def update_readme_badges(root: Path) -> bool:
-    """
-    In-place update of README.md skill count and coverage badges + coverage table.
-    Returns True if file was changed.
-    """
     readme = root / "README.md"
     if not readme.exists():
         return False
@@ -353,10 +396,9 @@ def update_readme_badges(root: Path) -> bool:
     content = readme.read_text(encoding="utf-8")
     original = content
 
-    # Actual counts
     domain_counts: dict[str, int] = {}
     for sm in root.rglob("SKILL.md"):
-        if ".claude" in sm.parts:
+        if ".claude" in sm.parts or ".skills" in sm.parts:
             continue
         parts = sm.relative_to(root).parts
         domain = parts[0]
@@ -368,46 +410,32 @@ def update_readme_badges(root: Path) -> bool:
     total_target = sum(COVERAGE_TARGETS.values())
     actual_pct   = round(total_active / total_target * 100) if total_target else 0
 
-    # Coverage color
     color = "red" if actual_pct < 40 else "orange" if actual_pct < 60 else "yellow" if actual_pct < 80 else "brightgreen"
 
-    from datetime import datetime
-    month_year = datetime.today().strftime("%B %Y").replace(" ", "%20")
+    from datetime import datetime as _dt
+    month_year = _dt.today().strftime("%B %Y").replace(" ", "%20")
 
-    # Replace badges
-    content = re.sub(
-        r"skills-\d+%20active-\w+",
-        f"skills-{total_active}%20active-{color}",
-        content
-    )
-    content = re.sub(
-        r"coverage-\d+%25-\w+",
-        f"coverage-{actual_pct}%25-{color}",
-        content
-    )
-    content = re.sub(
-        r"updated-[^)]+",
-        f"updated-{month_year}-lightgrey",
-        content
-    )
+    content = re.sub(r"skills-\d+%20active-\w+", f"skills-{total_active}%20active-{color}", content)
+    content = re.sub(r"coverage-\d+%25-\w+", f"coverage-{actual_pct}%25-{color}", content)
+    content = re.sub(r"updated-[^)]+", f"updated-{month_year}-lightgrey", content)
 
-    # Update coverage table rows like "| [pipeline](./pipeline/) | 0/6 | 0% |"
     def replace_domain_row(m):
-        domain_link = m.group(1)   # e.g. "pipeline"
-        domain_key  = re.search(r"\./(\S+)/", domain_link)
+        domain_link = m.group(0)
+        domain_key = re.search(r"\./(\S+)/", domain_link)
         if not domain_key:
             return m.group(0)
         dk = domain_key.group(1)
-        target = COVERAGE_TARGETS.get(dk, "?")
+        target = COVERAGE_TARGETS.get(dk)
+        if not target:
+            return m.group(0)
         active = domain_counts.get(dk, 0)
-        pct    = round(active / target * 100) if isinstance(target, int) and target else 0
-        # rebuild just the count and % columns (columns 2 and 3)
-        return re.sub(r"\d+/\d+", f"{active}/{target}", 
-               re.sub(r"\d+%", f"{pct}%", m.group(0), count=1), count=1)
+        pct = round(active / target * 100)
+        result = re.sub(r"\d+/\d+", f"{active}/{target}", domain_link, count=1)
+        result = re.sub(r"\d+%", f"{pct}%", result, count=1)
+        return result
 
     content = re.sub(r"\| \[.*?\]\(\.\/\w[\w-]*\/\).*?\|.*?\|.*?\|", replace_domain_row, content)
 
-    # Total row
     content = re.sub(
         r"(\*\*Итого\*\*.*?\| \*\*)\d+/51(\*\*.*?\| \*\*)\d+%(\*\*)",
         lambda m: f"{m.group(1)}{total_active}/51{m.group(2)}{actual_pct}%{m.group(3)}",
@@ -419,9 +447,16 @@ def update_readme_badges(root: Path) -> bool:
         return True
     return False
 
+
 # ─── Staging Scanner ──────────────────────────────────────────────────────────
 
-STAGING_STALE = {"raw": 14, "refining": 30, "ready": 30, "parked": 90}
+def _staging_thresholds() -> dict:
+    return {
+        "raw": SETTINGS.get("staging_raw_warning_days", 14),
+        "refining": SETTINGS.get("staging_ready_warning_days", 30),
+        "ready": SETTINGS.get("staging_ready_warning_days", 30),
+        "parked": SETTINGS.get("staging_parked_warning_days", 90),
+    }
 
 
 def scan_staging(root: Path) -> list[dict]:
@@ -429,7 +464,9 @@ def scan_staging(root: Path) -> list[dict]:
     if not staging_dir.exists():
         return []
 
+    thresholds = _staging_thresholds()
     results = []
+
     for note in sorted(staging_dir.glob("*.md")):
         if note.name in ("README.md", "_template.md"):
             continue
@@ -441,10 +478,9 @@ def scan_staging(root: Path) -> list[dict]:
 
         status = fm.get("status", "raw")
         days = days_since_update(fm.get("added", "")) or 0
-        threshold = STAGING_STALE.get(status, 30)
+        threshold = thresholds.get(status, 30)
         stale = days > threshold
 
-        # Readiness score 0–3
         readiness = 0
         if fm.get("skill_candidate") == "yes":
             readiness += 1
@@ -452,7 +488,7 @@ def scan_staging(root: Path) -> list[dict]:
         if len(body.split()) > 100:
             readiness += 1
         if "Вопросы без ответа" not in content or re.search(r"Вопросы без ответа\s*\n+\s*\{", content):
-            readiness += 1  # no blocking questions
+            readiness += 1
 
         results.append({
             "slug": note.stem,
@@ -477,10 +513,6 @@ def print_staging_report(notes: list[dict]):
 
     print(f"\n📥 STAGING ({len(notes)} notes)")
 
-    by_status = {}
-    for n in notes:
-        by_status.setdefault(n["status"], []).append(n)
-
     stars = {3: "★★★ ready", 2: "★★☆ almost", 1: "★☆☆ partial", 0: "☆☆☆ raw"}
 
     print(f"\n  {'Note':<30} {'Domain':<18} {'Status':<10} {'Days':>5} {'Readiness':<15} {'Action'}")
@@ -500,12 +532,13 @@ def print_staging_report(notes: list[dict]):
             action = "→ refine"
         print(f"  {n['title'][:29]:<30} {n['domain']:<18} {n['status']:<10} {n['days_in_staging']:>5}{stale_flag:<3} {stars[n['readiness']]:<15} {action}")
 
-    # Alerts
     alerts = []
     ready_notes = [n for n in notes if n["readiness"] == 3 or n["status"] == "ready"]
-    if len(ready_notes) > 5:
+    max_ready = SETTINGS.get("staging_max_ready", 5)
+    max_total = SETTINGS.get("staging_max_total", 20)
+    if len(ready_notes) > max_ready:
         alerts.append(f"⚠️  {len(ready_notes)} ready notes — backlog building up")
-    if len(notes) > 20:
+    if len(notes) > max_total:
         alerts.append(f"⚠️  {len(notes)} notes in staging — inbox overflowing")
     stale = [n for n in notes if n["stale"]]
     if stale:
@@ -517,9 +550,7 @@ def print_staging_report(notes: list[dict]):
             print(f"  {a}")
 
 
-# ─── Patch main to include staging ────────────────────────────────────────────
-
-_original_main = main
+# ─── Entry point ──────────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(description="Audit GxG RevOps Playbook skills + staging")
@@ -533,6 +564,8 @@ def main():
     if not root.exists():
         print(f"ERROR: root path not found: {root}", file=sys.stderr)
         sys.exit(1)
+
+    _init_config(root)
 
     staging_notes = scan_staging(root)
 

@@ -38,7 +38,7 @@ Ask (or infer from context):
 - Is this Capability Uplift or Encoded Preference? (see taxonomy.md)
 
 **Step 2 — Domain assignment**
-Read taxonomy.md §Domains. Pick the primary folder. If ambiguous, ask the user.
+Read `.skills/revops-curator/taxonomy.md` §Domains. Pick the primary folder. If ambiguous, ask the user.
 
 **Step 3 — Generate slug**
 Apply naming rules from taxonomy.md §Naming Conventions.
@@ -47,12 +47,12 @@ Present 2–3 options if not obvious. Let user confirm.
 **Step 4 — Scaffold**
 ```bash
 mkdir -p "{playbook-root}/{domain}/{slug}"
-cp templates/new-skill.md "{playbook-root}/{domain}/{slug}/SKILL.md"
 ```
+Copy `.skills/revops-curator/templates/new-skill.md` to `{playbook-root}/{domain}/{slug}/SKILL.md`.
 Fill in frontmatter: name, domain, tags, status=draft, version=1.0.0, updated=today, author=GxG.
 
 **Step 5 — Write description**
-Apply the Description Optimizer from SKILL.md. Draft 2–3 description options. Test each:
+Apply the Description Optimizer from `.skills/revops-curator/index.md`. Draft 2–3 description options. Test each:
 - Does it answer "what does it do"?
 - Does it answer "when to use it"?
 - Does it have ≥5 trigger keywords?
@@ -67,13 +67,13 @@ Structure:
 5. Out of scope section
 
 **Step 7 — Gate check**
-Run G1–G7 from SKILL.md. Document score. If ≥5/7, set status → `active`. If <5/7, set status → `needs-work` with inline comments.
+Run G1–G7 from `.skills/revops-curator/index.md`. Document score. If ≥5/7, set status → `active`. If <5/7, set status → `needs-work` with inline comments.
 
 **Step 8 — Index update**
-Add to INDEX.md under the correct domain section.
+Add to `INDEX.md` under the correct domain section.
 
-**Step 9 — README freshness check** ← выполнять автоматически после каждого create
-Run §README Freshness Check. Если stale — предложи обновить сразу, не откладывая.
+**Step 9 — README freshness check** ← run automatically after every create
+Run §README Freshness Check below. If stale — offer to update immediately.
 
 ---
 
@@ -83,11 +83,11 @@ Run §README Freshness Check. Если stale — предложи обновит
 User says: "audit", "health check", "quality score", "review skills", "how's the playbook"
 
 ### Audit Script
-Run `scripts/audit.py` or manually:
+Run `python .skills/revops-curator/scripts/audit.py` or manually:
 
 ```bash
 # Find all skills
-find "{playbook-root}" -name "SKILL.md" -not -path "*/.claude/*"
+find "{playbook-root}" -name "SKILL.md" -not -path "*/.claude/*" -not -path "*/.skills/*"
 ```
 
 For each skill found:
@@ -101,9 +101,9 @@ For each skill found:
    - G6: domain + tags in frontmatter?
    - G7: uses required frontmatter fields (status, version, updated, author)?
 3. Flag critical issues (score ≤2)
-4. Note last-updated date (stale = >90 days without update)
+4. Note last-updated date (stale = >90 days without update — see `.skills/config.yaml` `settings.stale_threshold_days`)
 
-Output using templates/audit-report.md.
+Output using `.skills/revops-curator/templates/audit-report.md`.
 
 ### Audit Frequency
 Run a full audit:
@@ -177,8 +177,8 @@ User says: "retire skill X", "deprecate", "this skill is outdated", "superseded 
    ```
 3. **Remove from active sections of INDEX.md** — move to a `## Deprecated` section at the bottom
 4. **Do NOT delete the file** — keep for historical reference
-5. **README freshness check** ← автоматически после deprecate
-   Run §README Freshness Check — active count изменился, badges могут устареть.
+5. **README freshness check** ← automatically after deprecate
+   Run §README Freshness Check — active count changed, badges may be stale.
 
 ### Archive (full removal)
 Only archive (physically move to an `_archived/` folder) if:
@@ -204,50 +204,45 @@ Track version history in a `## Changelog` section at the bottom of SKILL.md (opt
 ## Staleness Rules
 
 A skill is considered **stale** if:
-- `status: active` AND `updated` date > 90 days ago AND
+- `status: active` AND `updated` date > 90 days ago (see `.skills/config.yaml` `settings.stale_threshold_days`) AND
 - The underlying process or tool has changed
 
 Stale skills surface in the audit report with a ⏰ flag. The recommended action is Improve (bump updated date + re-verify accuracy) or Deprecate.
 
 ---
 
-
----
-
 ## README Freshness Check
 
-Запускать автоматически в конце: Create (step 9), Improve (если статус → active), Deprecate (step 5), Promote из staging.
+Run automatically at the end of: Create (step 9), Improve (if status → active), Deprecate (step 5), Promote from staging.
 
-### Алгоритм
+### Algorithm
 
-1. Прочитать `README.md` в корне playbook
-2. Найти badge со счётчиком скиллов:
-   `![Skills](https://img.shields.io/badge/skills-{N}%20active-...)`
-   Извлечь N из URL (число перед `%20active`)
-3. Найти badge с coverage:
-   `![Coverage](https://img.shields.io/badge/coverage-{PCT}%25-...)`
-   Извлечь PCT
-4. Подсчитать фактические данные: количество файлов `SKILL.md` со `status: active` (не считая `.claude/`)
-5. Вычислить фактический coverage: `active / 51 * 100`
+1. Read `README.md` at the playbook root
+2. Find the skills badge: `![Skills](https://img.shields.io/badge/skills-{N}%20active-...)`
+   Extract N (the number before `%20active`)
+3. Find the coverage badge: `![Coverage](https://img.shields.io/badge/coverage-{PCT}%25-...)`
+   Extract PCT
+4. Count actual data: number of `SKILL.md` files with `status: active` (excluding `.claude/` and `.skills/`)
+5. Calculate actual coverage: `active / 51 * 100` (total target from `.skills/config.yaml`)
 
-### Решение
+### Decision
 
-| Ситуация | Действие |
-|----------|---------|
-| badge_count == actual_count AND badge_pct ≈ actual_pct | README актуален — ничего не делать, не сообщать |
-| badge_count != actual_count | README устарел → предложить обновить |
-| coverage color не соответствует порогам | README устарел → предложить обновить |
+| Situation | Action |
+|-----------|--------|
+| badge_count == actual_count AND badge_pct ≈ actual_pct | README is current — do nothing, say nothing |
+| badge_count != actual_count | README is stale → offer to update |
+| coverage color doesn't match thresholds | README is stale → offer to update |
 
-### Как предлагать обновление
+### How to propose the update
 
-Предлагай коротко, в одну строку, после основного ответа:
+One line, postscript to the main response:
 
-> 📋 README устарел (было {OLD_N} скиллов → стало {NEW_N}). Обновить сейчас? (`да` / `потом`)
+> README is stale (was {OLD_N} skills → now {NEW_N}). Update now? (`yes` / `later`)
 
-Если пользователь говорит `да` или `обнови` — выполни Update README workflow из readme.md.
-Если `потом` или игнорирует — не повторять в этом же сеансе.
+If the user says `yes` or `update` → run Update README workflow from [readme-workflows.md](readme-workflows.md).
+If `later` or no response → don't repeat in this session.
 
-**Не прерывай основной workflow** ради README. Проверка — постскриптум, не блокер.
+**Don't interrupt the main workflow** for README. This check is a postscript, not a blocker.
 
 ## Contributing Standards (for the CONTRIBUTING.md file)
 

@@ -1,0 +1,68 @@
+# GxG RevOps Playbook — Shared Configuration
+# Single source of truth for all curator settings.
+# Read by: audit.py, index.md, lifecycle.md, any LLM executing curator workflows.
+
+playbook_root: "."  # relative to repo root
+
+domains:
+  pipeline:
+    name: "Pipeline & Forecasting"
+    folder: pipeline
+    target_skills: 6
+    priority_skills: [forecasting-pipeline, reviewing-pipeline, defining-stages]
+  demand-gen:
+    name: "Demand Generation"
+    folder: demand-gen
+    target_skills: 5
+    priority_skills: [scoring-leads, defining-icp, qualifying-mqls]
+  sales-enablement:
+    name: "Sales Enablement"
+    folder: sales-enablement
+    target_skills: 7
+    priority_skills: [building-battlecards, handling-objections, running-discovery]
+  crm-ops:
+    name: "CRM & Data Ops"
+    folder: crm-ops
+    target_skills: 6
+    priority_skills: [auditing-crm-data, managing-duplicates, designing-workflows]
+  rev-analytics:
+    name: "Revenue Analytics"
+    folder: rev-analytics
+    target_skills: 5
+    priority_skills: [defining-metrics, building-dashboards, modeling-attribution]
+  cs-ops:
+    name: "Customer Success Ops"
+    folder: cs-ops
+    target_skills: 5
+    priority_skills: [scoring-health, running-qbrs, analyzing-churn]
+  rev-tech:
+    name: "Revenue Tech Stack"
+    folder: rev-tech
+    target_skills: 4
+    priority_skills: [evaluating-tools, mapping-integrations]
+  pricing-packaging:
+    name: "Pricing & Packaging"
+    folder: pricing-packaging
+    target_skills: 4
+    priority_skills: [governing-discounts, designing-tiers]
+  territory-quota:
+    name: "Territory & Quota"
+    folder: territory-quota
+    target_skills: 4
+    priority_skills: [designing-territories, setting-quotas]
+  mktg-ops:
+    name: "Marketing Operations"
+    folder: mktg-ops
+    target_skills: 5
+    priority_skills: [routing-leads, running-campaigns, attributing-revenue]
+
+settings:
+  total_target_skills: 51
+  stale_threshold_days: 90
+  max_skill_lines: 500
+  max_description_chars: 1024
+  staging_ready_warning_days: 30
+  staging_parked_warning_days: 90
+  staging_raw_warning_days: 14
+  staging_max_total: 20
+  staging_max_ready: 5
