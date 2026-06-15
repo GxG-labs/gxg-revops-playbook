@@ -16,6 +16,7 @@ Configuration (domain targets, thresholds): read `.skills/config.yaml`.
 | **Gap analysis** | "gaps", "missing", "what's not covered", "coverage", "покрытие" | [taxonomy.md](taxonomy.md) §Coverage |
 | **Update index** | "update index", "refresh registry", "rebuild index" | §Index Management below |
 | **Deprecate** a skill | "retire", "deprecate", "archive", "sunset", "устарел" | [lifecycle.md](lifecycle.md) §Deprecate |
+| **Onboard external skill** | "onboard this skill", "import skill", "adapt this skill", "convert to our format", "причеши скилл", "вот ссылка на skill", "вот файл скилла" | [onboarding.md](onboarding.md) |
 | **Taxonomy questions** | "categories", "tags", "naming", "where does X go", "таксономия" | [taxonomy.md](taxonomy.md) |
 | **README** | "напиши readme", "обнови readme", "readme для репо", "readme score" | [readme-workflows.md](readme-workflows.md) |
 | **Add to staging** | "add to staging", "сохрани знание", "save for later", "база знаний" | [staging.md](staging.md) §Add |
@@ -45,8 +46,10 @@ Raw knowledge (meeting, doc, conversation)
 GxG RevOps Playbook/
 ├── INDEX.md                    ← Master registry
 ├── CONTRIBUTING.md             ← Standards for skill authors
+├── PROJECT_STRUCTURE.md        ← Repo architecture for humans and LLMs
 ├── CLAUDE.md                   ← Claude Code adapter
 ├── AGENTS.md                   ← Codex / Gemini adapter
+├── GEMINI.md                   ← Gemini adapter
 ├── _staging/                   ← Knowledge staging area
 │   ├── README.md
 │   ├── _template.md
@@ -54,16 +57,26 @@ GxG RevOps Playbook/
 ├── .skills/                    ← Shared skill content (LLM-agnostic)
 │   ├── MULTI_LLM_SKILLS_GUIDE.md
 │   ├── config.yaml             ← Single config for all settings
+│   ├── revops/                 ← User-facing RevOps orchestrator
+│   │   └── index.md
 │   └── revops-curator/         ← This skill
 │       ├── index.md            ← This file
 │       ├── taxonomy.md
 │       ├── lifecycle.md
+│       ├── onboarding.md
 │       ├── staging.md
 │       ├── readme-workflows.md
 │       └── templates/
 ├── .claude/skills/
+│   ├── gxg-revops/
+│   │   └── SKILL.md            ← Thin adapter for user-facing orchestrator
 │   └── gxg-revops-curator/
 │       └── SKILL.md            ← Thin adapter for Claude Code
+├── .agents/skills/
+│   ├── gxg-revops/
+│   │   └── SKILL.md            ← Thin adapter for agent runtimes
+│   └── gxg-revops-curator/
+│       └── SKILL.md            ← Thin adapter for agent runtimes
 │
 ├── pipeline/                   ← Domain folders (see taxonomy.md)
 ├── demand-gen/

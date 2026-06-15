@@ -28,13 +28,16 @@ repo/
 ├── CLAUDE.md           ← adapter: tells Claude Code where skills live
 ├── AGENTS.md           ← adapter: tells Codex/Gemini where skills live
 ├── GEMINI.md           ← adapter: tells Gemini where skills live (optional)
-├── .skills/            ← shared: the actual knowledge
+├── .skills/            ← shared: orchestrators, curator workflows, config
 │   ├── config.yaml     ← single config for all skills
 │   └── {skill-name}/
 │       ├── index.md    ← entry point: routing table + overview
 │       ├── *.md        ← sub-workflows, each ≤200 lines
 │       ├── templates/
 │       └── scripts/
+├── {domain}/
+│   └── {skill-slug}/
+│       └── SKILL.md    ← production domain skill, written LM-agnostically
 └── .claude/
     └── skills/
         └── {skill-name}/
@@ -42,6 +45,8 @@ repo/
 ```
 
 **Rule:** If you edit a workflow, you edit `.skills/{skill-name}/*.md`. You never touch the adapter files for content changes.
+
+For production domain skills in this playbook, `{domain}/{skill-slug}/SKILL.md` is also shared source content. It must stay LM-agnostic and must not reference one vendor unless the skill itself is explicitly about that vendor.
 
 ---
 

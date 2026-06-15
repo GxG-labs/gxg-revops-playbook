@@ -127,6 +127,7 @@ MIN_EXAMPLES = 2
 
 REQUIRED_FRONTMATTER = {"name", "description", "status", "domain", "tags", "version", "updated", "author"}
 VALID_STATUSES = {"draft", "review", "needs-work", "active", "deprecated", "archived"}
+ADAPTER_DIRS = {".agents", ".claude", ".skills"}
 
 SKILL_SCORE_LABELS = {
     7: "✅ Exemplary",
@@ -232,7 +233,7 @@ def scan_playbook(root: Path, domain_filter: str | None = None) -> list[dict]:
 
     for skill_md in sorted(root.rglob("SKILL.md")):
         # Skip curator adapter and shared skill content
-        if ".claude" in skill_md.parts or ".skills" in skill_md.parts:
+        if ADAPTER_DIRS.intersection(skill_md.parts):
             continue
         parts = skill_md.relative_to(root).parts
         if not parts:
@@ -358,7 +359,7 @@ def check_readme_freshness(root: Path) -> dict:
 
     actual_active = 0
     for sm in root.rglob("SKILL.md"):
-        if ".claude" in sm.parts or ".skills" in sm.parts:
+        if ADAPTER_DIRS.intersection(sm.parts):
             continue
         fm = parse_frontmatter(sm.read_text(encoding="utf-8"))
         if fm.get("status") == "active":
@@ -398,7 +399,7 @@ def update_readme_badges(root: Path) -> bool:
 
     domain_counts: dict[str, int] = {}
     for sm in root.rglob("SKILL.md"):
-        if ".claude" in sm.parts or ".skills" in sm.parts:
+        if ADAPTER_DIRS.intersection(sm.parts):
             continue
         parts = sm.relative_to(root).parts
         domain = parts[0]

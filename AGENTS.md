@@ -8,11 +8,26 @@ A collection of AI agent skills covering the full Revenue Operations stack. Skil
 
 All shared skill infrastructure is in `.skills/`. Configuration is in `.skills/config.yaml`.
 
+Start with `PROJECT.md` if you need to understand what belongs in the collection. Start with `PROJECT_STRUCTURE.md` if you need to understand the repository layout.
+
+---
+
+## User-Facing RevOps Orchestrator
+
+**When to activate:** user asks to run, find, or route a RevOps workflow. Trigger phrases include: "RevOps skill", "which workflow", "find skill", "business case", "case study", "success story", "proof of value", "ROI story", "playbook".
+
+**To use this skill:**
+1. Read `.skills/revops/index.md`
+2. Follow its routing table
+3. If it routes to a production skill, read that skill's `SKILL.md` and follow it
+
+Adapters exist at `.agents/skills/gxg-revops/SKILL.md` and `.claude/skills/gxg-revops/SKILL.md`; they are not the source of truth.
+
 ---
 
 ## RevOps Curator Skill
 
-**When to activate:** user asks about skill curation, playbook audit, adding a skill, gap analysis, staging knowledge, taxonomy questions, or updating the index or README. Trigger phrases include: "audit", "new skill", "scaffold", "gap analysis", "staging", "playbook", "taxonomy", "coverage", "deprecate", "promote to skill", "add to staging", "update index", "update readme", "база знаний", "новый скилл", "аудит скиллов".
+**When to activate:** user asks about skill curation, playbook audit, adding or onboarding a skill, gap analysis, staging knowledge, taxonomy questions, or updating the index or README. Trigger phrases include: "audit", "new skill", "scaffold", "import skill", "onboard this skill", "adapt this skill", "convert to our format", "gap analysis", "staging", "playbook", "taxonomy", "coverage", "deprecate", "promote to skill", "add to staging", "update index", "update readme", "база знаний", "новый скилл", "аудит скиллов", "причеши скилл", "вот ссылка на skill", "вот файл скилла".
 
 **To use this skill:**
 1. Read `.skills/revops-curator/index.md` — it contains the routing table that maps user intent to the right sub-workflow
@@ -25,6 +40,7 @@ Sub-files (all in `.skills/revops-curator/`):
 |------|----------|
 | `index.md` | Routing table, quality gates, knowledge flow, overview |
 | `lifecycle.md` | Create / Audit / Improve / Deprecate workflows |
+| `onboarding.md` | Import/adapt external skills from URLs, files, or pasted content |
 | `staging.md` | Add to staging, scan, refine, promote, park |
 | `taxonomy.md` | Domains, tags, naming rules, coverage targets |
 | `readme-workflows.md` | README creation and update workflows |
@@ -47,9 +63,13 @@ Located at `sales-enablement/writing-business-cases/SKILL.md`. Activate when use
 - Only skills with `status: active` are production-ready
 - The master index is `INDEX.md` at the repo root — rebuild it after any create/deprecate
 - Staging notes are in `_staging/{slug}.md` — use the curator to manage them
+- `.claude/skills/` and `.agents/skills/` contain adapters only; do not put production workflow logic there
+- Shared orchestrator and curator logic lives in `.skills/`
 
 ---
 
 ## Multi-LLM Architecture
 
 This repo follows the Single Source of Truth pattern for multi-LLM skills. See `.skills/MULTI_LLM_SKILLS_GUIDE.md` for the full guide on how skills are structured to work identically across Claude, Codex, Gemini, and other agents.
+
+## Imported Claude Cowork project instructions

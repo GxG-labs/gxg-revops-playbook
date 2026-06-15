@@ -6,9 +6,10 @@ This document defines the standards every skill in the playbook must meet. The `
 
 ## Before You Start
 
-1. Check `INDEX.md` — does a skill for this already exist?
-2. If yes: improve the existing skill instead of creating a duplicate.
-3. If no: proceed below.
+1. Check `PROJECT.md` — does this belong in the collection?
+2. Check `INDEX.md` — does a skill for this already exist?
+3. If yes: improve the existing skill instead of creating a duplicate.
+4. If no: proceed below.
 
 ---
 
@@ -30,11 +31,11 @@ Rules:
 
 ### Step 3 — Scaffold
 
-Copy `.claude/skills/gxg-revops-curator/templates/new-skill.md` to `{domain}/{slug}/SKILL.md` and fill in every `{placeholder}`.
+Copy `.skills/revops-curator/templates/new-skill.md` to `{domain}/{slug}/SKILL.md` and fill in every `{placeholder}`.
 
 ### Step 4 — Write a high-quality description
 
-The description is the most important part — it determines whether Claude activates the skill.
+The description is the most important part — it determines whether an LLM activates the skill.
 
 **Formula:**
 ```
@@ -47,7 +48,7 @@ or when user mentions "[keyword]", "[keyword]", "[keyword]", "[keyword]", "[keyw
 - [ ] Contains "Use when" or "USE WHEN"
 - [ ] ≥5 quoted trigger keywords
 - [ ] ≤1024 characters
-- [ ] Passes the "would Claude pick this?" test
+- [ ] Passes the "would the right LLM pick this?" test
 
 ### Step 5 — Quality gates
 
@@ -65,7 +66,7 @@ All 7 gates must pass before status → `active`:
 
 Run the audit script to check automatically:
 ```bash
-python .claude/skills/gxg-revops-curator/scripts/audit.py --domain {domain}
+python .skills/revops-curator/scripts/audit.py --domain {domain}
 ```
 
 ### Step 6 — Set status
@@ -116,7 +117,7 @@ Do not delete skills. Set `status: deprecated`, add the deprecation notice block
 
 **Strong:** concrete examples that show real GxG-specific inputs and outputs, tight scope, description that triggers on actual user language, clear "Out of Scope" that prevents mistriggers.
 
-**Weak:** generic instructions Claude already knows, vague trigger language, no examples, no scope boundaries.
+**Weak:** generic instructions an LLM already knows, vague trigger language, no examples, no scope boundaries.
 
 **Reject criteria:**
 - Duplicates an existing active skill

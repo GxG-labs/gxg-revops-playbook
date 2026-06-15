@@ -2,6 +2,8 @@
 
 This is the GxG RevOps Playbook — a collection of AI agent skills covering the full Revenue Operations stack.
 
+Read `PROJECT.md` for the project charter and criteria for what belongs in the collection.
+
 ## Shared Skill Content
 
 All skill knowledge lives in **`.skills/`** — this is the single source of truth, readable by any LLM.
@@ -14,6 +16,12 @@ All skill knowledge lives in **`.skills/`** — this is the single source of tru
 
 ## Available Claude Code Skills
 
+### gxg-revops
+Registered at `.claude/skills/gxg-revops/SKILL.md`.
+Invoke with `/gxg-revops` or by describing a RevOps task.
+
+The SKILL.md is a thin adapter — when invoked, it loads the shared orchestrator from `.skills/revops/index.md`.
+
 ### gxg-revops-curator
 Registered at `.claude/skills/gxg-revops-curator/SKILL.md`.
 Invoke with `/gxg-revops-curator` or by describing a playbook management task.
@@ -23,6 +31,7 @@ The SKILL.md is a thin adapter — when invoked, it loads the full instructions 
 Full curator content:
 - `.skills/revops-curator/index.md` — routing table, quality gates, overview
 - `.skills/revops-curator/lifecycle.md` — create, audit, improve, deprecate workflows
+- `.skills/revops-curator/onboarding.md` — import/adapt external skills from URLs, files, or pasted content
 - `.skills/revops-curator/staging.md` — staging area workflows
 - `.skills/revops-curator/taxonomy.md` — domains, tags, naming rules
 - `.skills/revops-curator/readme-workflows.md` — README creation and update
@@ -34,11 +43,14 @@ Full curator content:
 ```
 GxG RevOps Playbook/
 ├── INDEX.md          ← master skill registry
+├── PROJECT.md        ← charter and collection criteria
+├── PROJECT_STRUCTURE.md ← repository architecture for humans and LLMs
 ├── CONTRIBUTING.md   ← skill authoring standards
 ├── README.md         ← public-facing repo page
 ├── _staging/         ← raw knowledge awaiting promotion
 ├── .skills/          ← shared skill content (this is the SSoT)
 ├── .claude/skills/   ← Claude Code adapters (thin wrappers)
+├── .agents/skills/   ← Agent/Codex adapters (thin wrappers)
 │
 ├── pipeline/         ← domain skill folders
 ├── demand-gen/
@@ -55,5 +67,5 @@ GxG RevOps Playbook/
 ## For Other LLMs
 
 - **Codex / OpenAI**: see `AGENTS.md`
-- **Gemini**: see `AGENTS.md` (or create `GEMINI.md` following the same pattern)
+- **Gemini**: see `GEMINI.md`
 - **Architecture guide**: `.skills/MULTI_LLM_SKILLS_GUIDE.md`

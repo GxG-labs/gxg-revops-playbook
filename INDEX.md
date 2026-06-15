@@ -2,9 +2,9 @@
 
 > **Auto-maintained by `gxg-revops-curator` skill.** Run `/gxg-revops-curator` and say "update index" to refresh.
 
-**Last updated:** 2026-06-09
-**Total skills:** 1 active / 51 target
-**Overall coverage:** 2%
+**Last updated:** 2026-06-15
+**Total skills:** 2 active / 51 target
+**Overall coverage:** 4%
 
 ---
 
@@ -18,11 +18,11 @@
 | [crm-ops](#crm-ops) | 0 | 6 | 0% |
 | [rev-analytics](#rev-analytics) | 0 | 5 | 0% |
 | [cs-ops](#cs-ops) | 0 | 5 | 0% |
-| [rev-tech](#rev-tech) | 0 | 4 | 0% |
+| [rev-tech](#rev-tech) | 1 | 4 | 25% |
 | [pricing-packaging](#pricing-packaging) | 0 | 4 | 0% |
 | [territory-quota](#territory-quota) | 0 | 4 | 0% |
 | [mktg-ops](#mktg-ops) | 0 | 5 | 0% |
-| **TOTAL** | **1** | **51** | **2%** |
+| **TOTAL** | **2** | **51** | **4%** |
 
 ---
 
@@ -92,7 +92,7 @@
 
 | Skill | Status | Tags | Description |
 |-------|--------|------|-------------|
-| *(no active skills yet)* | | | |
+| [maintaining-llms-txt](rev-tech/maintaining-llms-txt/SKILL.md) | active | #process #automation #p2 | Maintains repository-level llms.txt navigation so LLM agents can understand project structure and key docs |
 
 ---
 
