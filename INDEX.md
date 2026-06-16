@@ -3,8 +3,8 @@
 > **Auto-maintained by `gxg-revops-curator` skill.** Run `/gxg-revops-curator` and say "update index" to refresh.
 
 **Last updated:** 2026-06-15
-**Total skills:** 2 active / 51 target
-**Overall coverage:** 4%
+**Total skills:** 3 active / 51 target
+**Overall coverage:** 6%
 
 ---
 
@@ -14,7 +14,7 @@
 |--------|--------|--------|----------|
 | [pipeline](#pipeline) | 0 | 6 | 0% |
 | [demand-gen](#demand-gen) | 0 | 5 | 0% |
-| [sales-enablement](#sales-enablement) | 1 | 7 | 14% |
+| [sales-enablement](#sales-enablement) | 2 | 7 | 28% |
 | [crm-ops](#crm-ops) | 0 | 6 | 0% |
 | [rev-analytics](#rev-analytics) | 0 | 5 | 0% |
 | [cs-ops](#cs-ops) | 0 | 5 | 0% |
@@ -52,6 +52,7 @@
 
 | Skill | Status | Tags | Description |
 |-------|--------|------|-------------|
+| [optimizing-linkedin-profile](sales-enablement/optimizing-linkedin-profile/SKILL.md) | active | #playbook #process #template #analysis #p1 | Optimizes LinkedIn profiles for recruiter visibility, career positioning, B2B sales, and social selling |
 | [writing-business-cases](sales-enablement/writing-business-cases/SKILL.md) | active | #template #playbook #framework #p1 | Produces B2B business cases in a four-level pyramid — one-line, paragraph, slide, and full web-page versions |
 
 ---

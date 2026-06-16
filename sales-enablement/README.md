@@ -10,6 +10,7 @@
 
 | Skill | Status | Score | Tags | Last Updated |
 |-------|--------|-------|------|-------------|
+| [optimizing-linkedin-profile](optimizing-linkedin-profile/SKILL.md) | active | — | #playbook #process #template #analysis #p1 | 2026-06-15 |
 | [writing-business-cases](writing-business-cases/SKILL.md) | active | — | #template #playbook #framework #p1 | 2026-06-09 |
 
 ---
