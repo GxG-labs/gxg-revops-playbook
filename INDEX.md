@@ -2,7 +2,7 @@
 
 > **Auto-maintained by `gxg-revops-curator` skill.** Run `/gxg-revops-curator` and say "update index" to refresh.
 
-**Last updated:** 2026-06-15
+**Last updated:** 2026-06-17
 **Total skills:** 3 active / 51 target
 **Overall coverage:** 6%
 

@@ -23,10 +23,16 @@ Avoid dense text because mobile crops aggressively.
 
 ### Headline
 
-Formula:
+Two proven formulas — pick based on keyword density vs. readability preference:
 
+**Formula A — Pipe-separated (higher keyword density):**
 ```text
 {Target role/category} | {Specialty/domain} | {Core skills/tools} | {Proof/outcome}
+```
+
+**Formula B — Dot-separated (more readable, keyword-rich):**
+```text
+[Role] | [Keyword] · [Keyword] · [Keyword] | [Credibility anchor]
 ```
 
 Career examples:
@@ -36,7 +42,7 @@ RevOps Manager | B2B SaaS Pipeline & Forecasting | Salesforce, HubSpot, Attribut
 ```
 
 ```text
-Senior Product Manager | B2B SaaS Growth | PLG, Experimentation, GTM
+Senior Product Manager | B2B SaaS Growth | PLG · Experimentation · GTM | 3× pipeline growth at Series B
 ```
 
 B2B examples:
@@ -46,8 +52,12 @@ Fractional RevOps Lead | HubSpot + Salesforce GTM Systems | Pipeline Visibility 
 ```
 
 ```text
-AI GTM Consultant | Sales Research Automation & RevOps Workflows | Turning Manual Pipeline Work Into Systems
+AI GTM Consultant | Sales Research Automation & RevOps Workflows | Revenue Operations · CRM · Outbound Systems
 ```
+
+For each headline option, include keyword reasoning:
+- Why each keyword was chosen (recruiter search frequency, Sales Navigator filter alignment, or ICP language match)
+- Which keywords are search-optimized vs. which are credibility signals
 
 Avoid:
 - Open to Work
@@ -96,7 +106,7 @@ Each relevant role should include:
 - 4-8 bullets for important roles
 - Tools and methods
 - Scope and outcomes
-- Attached skills if available
+- **Exactly 10 attached skills per role** — use LinkedIn's exact skill nomenclature, not invented titles. Prioritize skills that align with target role/client keywords and are searchable in LinkedIn Recruiter and Sales Navigator filters.
 
 Bullet formula:
 

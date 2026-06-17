@@ -58,6 +58,64 @@ Interpretation:
 - 12-19: search or proof gaps
 - 0-11: rebuild positioning first
 
+## Two-Phase: Export Audit → Profile Rebuild
+
+Use this when the user has their LinkedIn export and wants to go from raw data to a fully rewritten profile. Run the phases sequentially — Phase 2 requires Phase 1 output.
+
+### Phase 1 — Algorithmic Audit
+
+Open your terminal in the LinkedIn export folder (or point Claude Code at the folder path), then run:
+
+```text
+Audit my LinkedIn profile using the files in this export folder.
+
+Analyze:
+- Ad_Targeting.csv → summarize how LinkedIn categorizes me (Perceived Identity)
+- Connections.csv → network composition, top industries, seniority distribution
+- Skills.csv → skills I've listed vs. skills my connections have endorsed most
+- Learning.csv → professional development themes
+- Company Follows.csv → inferred interests and industry signals
+
+Output:
+1. Perceived Identity summary — what LinkedIn thinks my professional identity is
+2. Gap analysis — where my actual or intended identity differs from LinkedIn's view
+3. Network composition summary
+4. Skill gap table — present vs. target role/client requirements
+5. Top 3 repositioning priorities
+```
+
+### Phase 2 — Full Profile Rebuild
+
+After Phase 1, add your resume/CV to the context, then run:
+
+```text
+Using the audit from Phase 1 and my resume below, rewrite my LinkedIn profile.
+
+Resume:
+{paste or path}
+
+Target outcome: {recruiter visibility / B2B clients / hybrid}
+Target roles or ICP: {list}
+
+Produce:
+1. Headline — use format: [Role] | [Keyword] · [Keyword] · [Keyword] | [Credibility anchor]
+   Include keyword reasoning for each choice.
+2. About section — first-person, professional hook, concrete examples, connection invitation.
+3. Experience entries — rewritten descriptions + 10 exact skills per role (use LinkedIn's exact skill nomenclature).
+4. Projects — any missing projects from resume with descriptions and 5 associated skills each.
+5. Skills management — removal recommendations, additions, top 3 pins ranked by search priority.
+6. Certifications — 3–5 specific recommendations with provider and relevance justification.
+7. Content strategy:
+   - 4 executable post concepts grounded in your actual experience
+   - 3 high-performing 2026 formats (e.g., carousel, video, document post)
+   - Target engagement behaviors and posting frequency
+   - Daily algorithmic training tactics (comment targets, reaction patterns)
+
+Do not invent facts. Mark missing proof with [PROOF NEEDED].
+```
+
+---
+
 ## LLM Prompt: Export Audit
 
 ```text

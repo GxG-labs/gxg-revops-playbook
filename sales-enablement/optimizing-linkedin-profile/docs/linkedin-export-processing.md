@@ -2,6 +2,39 @@
 
 Use this when the user provides `Complete_LinkedInDataExport.zip`, an unzipped LinkedIn export directory, or CSV files from LinkedIn's "Get a copy of your data" feature.
 
+## How to Download Your LinkedIn Data
+
+If the user does not have the export yet, give them these exact steps:
+
+1. Open [linkedin.com](https://www.linkedin.com) and log in.
+2. Click your profile photo → **Settings & Privacy**.
+3. In the left sidebar, click **Data Privacy**.
+4. Click **Get a copy of your data**.
+5. Select **Want something in particular? → Request a data archive**.
+6. Check the box for **Select all** (or pick specific categories — see below).
+7. Click **Request archive**.
+8. LinkedIn emails a download link within 10 minutes (basic) to 24 hours (full archive).
+9. Download the ZIP and place it anywhere on your machine.
+10. Share the path (or unzipped folder) with the agent.
+
+**Recommended categories to select:**
+- Profile
+- Positions
+- Education
+- Skills
+- Certifications
+- Connections
+- Invitations
+- Ad Targeting (reveals LinkedIn's algorithmic perception of you)
+- Inferences about you
+- Messages (optional — only if you want network/outreach analysis)
+- Learning (optional — shows skill development trajectory)
+- Company Follows (optional — reveals inferred interests)
+
+> The full archive may take up to 24 hours. For a fast first pass, request only Profile, Positions, Education, Skills, and Ad Targeting — these arrive in ~10 minutes.
+
+---
+
 ## Privacy and Boundary
 
 Use official user-provided export files. Do not scrape live LinkedIn pages or ask for cookies. Do not infer private facts not present in the export or supplied by the user.
@@ -131,15 +164,37 @@ Analyze:
 
 Do not expose private message content in final output unless needed and approved.
 
-### 7. Ad Targeting / Inferences
+### 7. Ad Targeting / Inferences — Perceived Identity Analysis
 
-If present, use as weak signal only. It may reveal how LinkedIn ad systems classify the user, but it is not a recruiter-ranking source of truth.
+`Ad_Targeting.csv` and `Inferences_about_you.csv` reveal how LinkedIn's algorithm currently classifies the user. This is valuable because recruiters and Sales Navigator users often see an algorithmically filtered version of your profile — not the one you think you're showing.
 
-Use for:
-- Detecting mismatch between desired positioning and platform-inferred categories
-- Finding old industries or irrelevant interests polluting the user's market signal
+Run a **Perceived Identity** analysis:
 
-Do not overfit to ad categories.
+1. Extract all targeting categories from `Ad_Targeting.csv` (columns: `Category`, `Value`).
+2. Group into clusters: industry, seniority, function, skills/tools, interests, company type, geography.
+3. Extract member attributes from `Inferences_about_you.csv` if present.
+4. Summarize as a "Perceived Identity" statement: what profile LinkedIn thinks this person has.
+
+Output format:
+```markdown
+## Perceived Identity (LinkedIn Algorithmic View)
+
+**Industry signal:** {what LinkedIn thinks your industry is}
+**Seniority signal:** {what LinkedIn infers about your level}
+**Function signal:** {department/role LinkedIn places you in}
+**Skills/tools signal:** {tools and capabilities LinkedIn associates with you}
+**Interest signal:** {topics and content LinkedIn links to you}
+**Company type signal:** {B2B/B2C/startup/enterprise inference}
+
+**Gap analysis:**
+| What LinkedIn thinks | What you want to be seen as | Severity |
+|---------------------|----------------------------|----------|
+| {category mismatch} | {desired positioning} | High/Med/Low |
+```
+
+5. Use the gap table to prioritize profile rewrites — sections that correct high-severity mismatches get the most keyword and proof investment.
+
+Do not overfit to ad categories. Ad targeting is a probabilistic system, not a recruiter ranking input. Treat it as a directional signal, not ground truth.
 
 ## Output
 

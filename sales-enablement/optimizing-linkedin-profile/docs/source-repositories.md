@@ -69,20 +69,22 @@ Use for:
 Limits:
 - Not specific to LinkedIn export or B2B LinkedIn sales.
 
-## Useful but Secondary
-
 ### cosmo-hg / LinkedIn-Profile-Optimization-Prompts
 
 URL: <https://github.com/cosmo-hg/Linkedin-Profile-Optimization-Prompts>
 
 Use for:
-- Idea of auditing LinkedIn export data such as ad-targeting classifications.
-- Prompt-based profile rebuild experiments.
+- **Perceived Identity analysis** — auditing `Ad_Targeting.csv` and `Inferences_about_you.csv` to reveal how LinkedIn's algorithm categorizes the user before any rewrite.
+- **Two-phase chained workflow**: Phase 1 Audit (open Claude Code in export folder) → Phase 2 Rebuild (add resume, generate full rewrites).
+- **Dot-separated headline formula**: `[Role] | [Keyword] · [Keyword] · [Keyword] | [Credibility anchor]`.
+- **10 exact skills per experience role** using LinkedIn's official skill nomenclature.
+- **2026 content strategy**: 4 post concepts, 3 high-performing formats, daily algorithmic training tactics.
+- **Specific certification recommendations** with providers and relevance justification.
 
-Limits:
-- Experimental and incomplete.
-- Not a mature career-consulting skill.
-- Use as a data-audit idea, not as the main methodology.
+Adapted: 2026-06-17
+Changes: Extracted the workflow, Perceived Identity concept, and headline/skills guidelines; integrated into `linkedin-export-processing.md`, `profile-section-guide.md`, and `checklists-and-prompts.md`. Generalized away from single-LLM (Claude) framing.
+
+## Useful but Secondary
 
 ### juanmanueldaza / linkedin2md
 

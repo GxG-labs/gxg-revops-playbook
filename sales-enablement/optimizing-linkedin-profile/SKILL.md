@@ -5,8 +5,8 @@ status: active
 domain: sales-enablement
 type: capability-uplift
 tags: [sales-enablement, demand-gen, #playbook, #process, #template, #analysis, #p1]
-version: 1.0.0
-updated: 2026-06-15
+version: 1.1.0
+updated: 2026-06-17
 author: GxG
 allowed-tools: Read, Write, Bash, Glob, Grep
 ---
@@ -88,6 +88,7 @@ When this skill is invoked, run the whole system. Do not ask the user to choose 
 | Workflow | Trigger | Read |
 |----------|---------|------|
 | **Source Research** | "what is current best practice?" / "save the research" | [docs/research-2026.md](docs/research-2026.md), [docs/source-repositories.md](docs/source-repositories.md) |
+| **Data Download Guide** | "how to download LinkedIn data" / "I don't have the export yet" | [docs/linkedin-export-processing.md](docs/linkedin-export-processing.md) — How to Download section |
 | **LinkedIn Export Audit** | "process my LinkedIn export" / `Complete_LinkedInDataExport.zip` | [docs/linkedin-export-processing.md](docs/linkedin-export-processing.md) |
 | **Positioning Strategy** | "target role", "target client", "position me" | [docs/positioning.md](docs/positioning.md) |
 | **Profile Rewrite** | "rewrite my profile", "optimize headline/About/Experience" | [docs/profile-section-guide.md](docs/profile-section-guide.md) |
@@ -291,4 +292,5 @@ This skill does NOT:
 
 | Version | Date | Change |
 |---------|------|--------|
+| 1.1.0 | 2026-06-17 | Integrated cosmo-hg/Linkedin-Profile-Optimization-Prompts: added LinkedIn data download guide, Perceived Identity analysis (Ad_Targeting.csv), two-phase Audit→Rebuild prompt workflow, dot-separated headline formula, 10-skills-per-role guideline |
 | 1.0.0 | 2026-06-15 | Initial active skill with research pack, export parser, profile rewrite workflow, career mode, B2B sales mode, and after-update activity plan |
