@@ -3,8 +3,8 @@
 > **Auto-maintained by `gxg-revops-curator` skill.** Run `/gxg-revops-curator` and say "update index" to refresh.
 
 **Last updated:** 2026-06-17
-**Total skills:** 3 active / 51 target
-**Overall coverage:** 6%
+**Total skills:** 4 active / 51 target
+**Overall coverage:** 8%
 
 ---
 
@@ -14,7 +14,7 @@
 |--------|--------|--------|----------|
 | [pipeline](#pipeline) | 0 | 6 | 0% |
 | [demand-gen](#demand-gen) | 0 | 5 | 0% |
-| [sales-enablement](#sales-enablement) | 2 | 7 | 28% |
+| [sales-enablement](#sales-enablement) | 3 | 7 | 43% |
 | [crm-ops](#crm-ops) | 0 | 6 | 0% |
 | [rev-analytics](#rev-analytics) | 0 | 5 | 0% |
 | [cs-ops](#cs-ops) | 0 | 5 | 0% |
@@ -22,7 +22,7 @@
 | [pricing-packaging](#pricing-packaging) | 0 | 4 | 0% |
 | [territory-quota](#territory-quota) | 0 | 4 | 0% |
 | [mktg-ops](#mktg-ops) | 0 | 5 | 0% |
-| **TOTAL** | **2** | **51** | **4%** |
+| **TOTAL** | **4** | **51** | **8%** |
 
 ---
 
@@ -52,6 +52,7 @@
 
 | Skill | Status | Tags | Description |
 |-------|--------|------|-------------|
+| [facilitating-brainstorming](sales-enablement/facilitating-brainstorming/SKILL.md) | active | #framework #playbook #process #p2 | Facilitates structured brainstorming sessions using 108 creative techniques across three facilitation modes |
 | [optimizing-linkedin-profile](sales-enablement/optimizing-linkedin-profile/SKILL.md) | active | #playbook #process #template #analysis #p1 | Optimizes LinkedIn profiles for recruiter visibility, career positioning, B2B sales, and social selling |
 | [writing-business-cases](sales-enablement/writing-business-cases/SKILL.md) | active | #template #playbook #framework #p1 | Produces B2B business cases in a four-level pyramid — one-line, paragraph, slide, and full web-page versions |
 
