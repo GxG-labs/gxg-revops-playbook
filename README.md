@@ -1,5 +1,4 @@
 ![Skills](https://img.shields.io/badge/skills-1%20active-yellow)
-![Coverage](https://img.shields.io/badge/coverage-2%25-red)
 ![Domains](https://img.shields.io/badge/domains-10-blue)
 ![Updated](https://img.shields.io/badge/updated-June%202026-lightgrey)
 
@@ -48,19 +47,19 @@ It routes RevOps requests to the right production skill.
 
 ## What's Inside
 
-| Domain | Skills | Coverage | Description |
-|--------|--------|----------|-------------|
-| [pipeline](./pipeline/) | 0/6 | 0% | Pipeline management, forecasting, stage hygiene |
-| [demand-gen](./demand-gen/) | 0/5 | 0% | ICP, lead scoring, MQL/SQL criteria, ABM |
-| [sales-enablement](./sales-enablement/) | 1/7 | 14% | Playbooks, battle cards, objection handling |
-| [crm-ops](./crm-ops/) | 0/6 | 0% | Salesforce/HubSpot, data quality, automation |
-| [rev-analytics](./rev-analytics/) | 0/5 | 0% | KPIs, attribution, dashboards, ARR/NRR/GRR |
-| [cs-ops](./cs-ops/) | 0/5 | 0% | Health scoring, QBRs, retention, expansion |
-| [rev-tech](./rev-tech/) | 0/4 | 0% | Tool evaluation, integrations, vendor management |
-| [pricing-packaging](./pricing-packaging/) | 0/4 | 0% | CPQ, tiers, deal desk, discount governance |
-| [territory-quota](./territory-quota/) | 0/4 | 0% | Territories, quotas, ramp plans, compensation |
-| [mktg-ops](./mktg-ops/) | 0/5 | 0% | Campaign ops, automation, lead routing |
-| **Total** | **1/51** | **2%** | |
+| Domain | Skills | Description |
+|--------|--------|-------------|
+| [pipeline](./pipeline/) | 0/6 | Pipeline management, forecasting, stage hygiene |
+| [demand-gen](./demand-gen/) | 0/5 | ICP, lead scoring, MQL/SQL criteria, ABM |
+| [sales-enablement](./sales-enablement/) | 1/7 | Playbooks, battle cards, objection handling |
+| [crm-ops](./crm-ops/) | 0/6 | Salesforce/HubSpot, data quality, automation |
+| [rev-analytics](./rev-analytics/) | 0/5 | KPIs, attribution, dashboards, ARR/NRR/GRR |
+| [cs-ops](./cs-ops/) | 0/5 | Health scoring, QBRs, retention, expansion |
+| [rev-tech](./rev-tech/) | 0/4 | Tool evaluation, integrations, vendor management |
+| [pricing-packaging](./pricing-packaging/) | 0/4 | CPQ, tiers, deal desk, discount governance |
+| [territory-quota](./territory-quota/) | 0/4 | Territories, quotas, ramp plans, compensation |
+| [mktg-ops](./mktg-ops/) | 0/5 | Campaign ops, automation, lead routing |
+| **Total** | **1/51** | |
 
 ---
 
