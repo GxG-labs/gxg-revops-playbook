@@ -1,5 +1,5 @@
-![Skills](https://img.shields.io/badge/skills-1%20active-yellow)
-![Domains](https://img.shields.io/badge/domains-10-blue)
+![Skills](https://img.shields.io/badge/skills-3%20active-brightgreen)
+![Domains](https://img.shields.io/badge/domains-1%20active-blue)
 ![Updated](https://img.shields.io/badge/updated-June%202026-lightgrey)
 
 # GxG RevOps Playbook
@@ -18,7 +18,7 @@ For the project charter and criteria for what belongs in this collection, start 
 - ✅ **Speed** — standard RevOps tasks solved in a single skill call, no prompt engineering required
 - ✅ **Consistent standard** — everyone on the team works from the same GxG approach
 - ✅ **Living knowledge base** — staging area for domain knowledge that hasn't become a skill yet
-- ✅ **Full stack** — target: 51 skills across 10 domains from pipeline to CS ops
+- ✅ **Evolving** — starting with sales-enablement, expanding to cover the full RevOps stack
 
 ---
 
@@ -34,8 +34,8 @@ It routes RevOps requests to the right production skill.
 **2.** Or call an active skill directly:
 ```
 /writing-business-cases
-/scoring-leads
-/forecasting-pipeline
+/optimizing-linkedin-profile
+/facilitating-brainstorming
 ```
 
 **3.** Use the curator only for maintaining the library:
@@ -49,17 +49,7 @@ It routes RevOps requests to the right production skill.
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| [pipeline](./pipeline/) | 0/6 | Pipeline management, forecasting, stage hygiene |
-| [demand-gen](./demand-gen/) | 0/5 | ICP, lead scoring, MQL/SQL criteria, ABM |
-| [sales-enablement](./sales-enablement/) | 1/7 | Playbooks, battle cards, objection handling |
-| [crm-ops](./crm-ops/) | 0/6 | Salesforce/HubSpot, data quality, automation |
-| [rev-analytics](./rev-analytics/) | 0/5 | KPIs, attribution, dashboards, ARR/NRR/GRR |
-| [cs-ops](./cs-ops/) | 0/5 | Health scoring, QBRs, retention, expansion |
-| [rev-tech](./rev-tech/) | 0/4 | Tool evaluation, integrations, vendor management |
-| [pricing-packaging](./pricing-packaging/) | 0/4 | CPQ, tiers, deal desk, discount governance |
-| [territory-quota](./territory-quota/) | 0/4 | Territories, quotas, ramp plans, compensation |
-| [mktg-ops](./mktg-ops/) | 0/5 | Campaign ops, automation, lead routing |
-| **Total** | **1/51** | |
+| [sales-enablement](./sales-enablement/) | 3/7 | Playbooks, battle cards, objection handling, brainstorming, LinkedIn optimization |
 
 ---
 
@@ -80,16 +70,7 @@ GxG RevOps Playbook/
 ├── .agents/skills/
 │   ├── gxg-revops/         ← thin agent adapter for the user-facing orchestrator
 │   └── gxg-revops-curator/ ← thin agent adapter for maintaining this repo
-├── pipeline/
-├── demand-gen/
-├── sales-enablement/
-├── crm-ops/
-├── rev-analytics/
-├── cs-ops/
-├── rev-tech/
-├── pricing-packaging/
-├── territory-quota/
-└── mktg-ops/
+└── sales-enablement/       ← active domain with production skills
 ```
 
 ---
