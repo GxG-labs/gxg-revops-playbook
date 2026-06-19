@@ -68,19 +68,46 @@ Avoid:
 
 ## About
 
+LinkedIn's export may label this field `Summary`; the LinkedIn UI usually calls it `About`.
+
 The first two lines must earn the click before "see more."
+
+Start with an identity hook: one short phrase or sentence that makes the person easy to remember. It should combine role/category, audience or context, and a concrete outcome or proof signal.
+
+Examples:
+
+```text
+Sales operator helping Series A startups reach $10M ARR.
+```
+
+```text
+Recent MBA grad who became the SQL person for GTM analytics at Google.
+```
+
+```text
+Growth marketer who helped a YC startup reach its first 1M users.
+```
+
+```text
+First designer at Instacart, now building design systems for marketplace teams.
+```
+
+Avoid identity hooks that are clever but vague, such as "builder", "problem solver", "growth-minded leader", or "helping companies grow."
 
 Structure:
 
-1. Identity and audience
-2. Problems solved
-3. Proof bullets
-4. Tools/domains
-5. CTA or opportunity preference
+1. Identity hook
+2. Audience and problem
+3. Problems solved
+4. Proof bullets
+5. Tools/domains
+6. CTA or opportunity preference
 
 Template:
 
 ```text
+{Short identity hook}.
+
 I help {audience} solve {problem} by {mechanism}.
 
 My work spans {domains/tools}. I usually work where {context/trigger} creates {business pain}.
@@ -92,6 +119,24 @@ Selected proof:
 
 Open to {target roles/projects/intros}. Best way to reach me: {contact path}.
 ```
+
+Alternative when the identity hook already contains the audience and problem:
+
+```text
+{Short identity hook}.
+
+Recent work includes {proof 1}, {proof 2}, and {proof 3}. My strongest areas are {skills/methods}.
+
+Open to {target roles/projects/intros}. Best way to reach me: {contact path}.
+```
+
+Legacy structure if a shorter About is needed:
+
+1. Identity and audience
+2. Problems solved
+3. Proof bullets
+4. Tools/domains
+5. CTA or opportunity preference
 
 Rules:
 - Write in first person if it sounds natural.
@@ -241,4 +286,3 @@ Check:
 - Creator/follow settings if relevant
 - Notifications off during major rewrite
 - Verification if available
-

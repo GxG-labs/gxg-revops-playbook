@@ -58,6 +58,8 @@ Fractional {Function} | {Tool/domain} | Helping {ICP} solve {pain}
 ## B2B About Template
 
 ```text
+{Short identity hook: category + ICP + outcome or proof}.
+
 I help {ICP} solve {pain} so they can {business outcome}.
 
 Most teams come to me when {trigger}. The problem usually looks like {symptoms}. I work on {mechanism/process/tools}.
@@ -139,4 +141,3 @@ Track:
 - Post saves/comments from ICP
 - Featured clicks
 - Inbound messages mentioning a specific post or proof asset
-

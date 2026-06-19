@@ -40,6 +40,7 @@ Score each 0-2:
 | Photo is current and professional | |
 | Banner supports positioning | |
 | Location matches target market | |
+| About opens with a memorable identity hook | |
 | About first two lines are specific | |
 | About includes proof and CTA | |
 | Current role contains searchable keywords | |
@@ -53,9 +54,9 @@ Score each 0-2:
 | Analytics baseline recorded | |
 
 Interpretation:
-- 28-34: strong
-- 20-27: usable but needs conversion work
-- 12-19: search or proof gaps
+- 30-36: strong
+- 22-29: usable but needs conversion work
+- 13-21: search or proof gaps
 - 0-11: rebuild positioning first
 
 ## Two-Phase: Export Audit → Profile Rebuild

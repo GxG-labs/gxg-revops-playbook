@@ -5,8 +5,8 @@ status: active
 domain: sales-enablement
 type: capability-uplift
 tags: [sales-enablement, demand-gen, #playbook, #process, #template, #analysis, #p1]
-version: 1.1.0
-updated: 2026-06-17
+version: 1.1.1
+updated: 2026-06-19
 author: GxG
 allowed-tools: Read, Write, Bash, Glob, Grep
 ---
@@ -178,6 +178,7 @@ Follow [docs/post-launch-plan.md](docs/post-launch-plan.md). Create:
 Before final output, verify:
 - The profile names a clear audience and target outcome
 - The headline contains target role/category terms and a proof signal
+- The About opens with a memorable identity hook, not a generic professional summary
 - The first two lines of About are strong enough before "see more"
 - Experience uses outcomes, scope, systems, or concrete problems instead of responsibilities only
 - Skills match the target role/client, not only the user's past
@@ -292,5 +293,6 @@ This skill does NOT:
 
 | Version | Date | Change |
 |---------|------|--------|
+| 1.1.1 | 2026-06-19 | Added About/Summary identity hook guidance with examples and updated career/B2B templates plus audit checklist |
 | 1.1.0 | 2026-06-17 | Integrated cosmo-hg/Linkedin-Profile-Optimization-Prompts: added LinkedIn data download guide, Perceived Identity analysis (Ad_Targeting.csv), two-phase Audit→Rebuild prompt workflow, dot-separated headline formula, 10-skills-per-role guideline |
 | 1.0.0 | 2026-06-15 | Initial active skill with research pack, export parser, profile rewrite workflow, career mode, B2B sales mode, and after-update activity plan |

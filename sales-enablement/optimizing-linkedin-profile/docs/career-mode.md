@@ -55,7 +55,9 @@ The profile must support both exact filters and human judgment.
 ## Career About Template
 
 ```text
-{Target role/category} with experience in {domain/tools/problems}. I focus on {business outcome} for {team/company type}.
+{Short identity hook: target role/category + context + proof or outcome}.
+
+I work across {domain/tools/problems}, with a focus on {business outcome} for {team/company type}.
 
 Recent work includes {proof 1}, {proof 2}, and {proof 3}. My strongest areas are {skills/methods}.
 
@@ -97,7 +99,7 @@ Flag:
 
 - Headline says the target role
 - Current role supports the target role
-- About first two lines are relevant to the target role
+- About opens with a memorable identity hook relevant to the target role
 - Skills match the job description
 - Experience has proof, not only responsibilities
 - Featured contains portfolio/case proof
@@ -117,4 +119,3 @@ Flag:
 - Resume alignment issues:
 - Referral/networking targets:
 ```
-
