@@ -127,7 +127,7 @@ MIN_EXAMPLES = 2
 
 REQUIRED_FRONTMATTER = {"name", "description", "status", "domain", "tags", "version", "updated", "author"}
 VALID_STATUSES = {"draft", "review", "needs-work", "active", "deprecated", "archived"}
-ADAPTER_DIRS = {".agents", ".claude", ".skills"}
+ADAPTER_DIRS = {".agents", ".claude", ".skills", "_input"}
 
 SKILL_SCORE_LABELS = {
     7: "✅ Exemplary",

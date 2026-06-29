@@ -87,7 +87,7 @@ Run `python .skills/revops-curator/scripts/audit.py` or manually:
 
 ```bash
 # Find all skills
-find "{playbook-root}" -name "SKILL.md" -not -path "*/.agents/*" -not -path "*/.claude/*" -not -path "*/.skills/*"
+find "{playbook-root}" -name "SKILL.md" -not -path "*/.skills/*" -not -path "*/_input/*"
 ```
 
 For each skill found:
@@ -222,8 +222,8 @@ Run automatically at the end of: Create (step 9), Improve (if status → active)
    Extract N (the number before `%20active`)
 3. Find the coverage badge: `![Coverage](https://img.shields.io/badge/coverage-{PCT}%25-...)`
    Extract PCT
-4. Count actual data: number of `SKILL.md` files with `status: active` (excluding `.agents/`, `.claude/`, and `.skills/`)
-5. Calculate actual coverage: `active / 51 * 100` (total target from `.skills/config.yaml`)
+4. Count actual data: number of `SKILL.md` files with `status: active` (excluding `.skills/` and `_input/`)
+5. Calculate actual coverage from `.skills/config.yaml` `settings.total_target_skills`
 
 ### Decision
 

@@ -1,36 +1,26 @@
-# Multi-LLM Skills — Best Practices Guide
+# Multi-LLM Skills - Best Practices Guide
 
-A skill that only works in one AI assistant is a liability. This guide covers how to write, structure, and maintain skills that run identically in Claude Code, Codex, Gemini, and any future LLM that can read files and follow instructions.
+A skill that only works in one AI assistant is a liability. This guide explains how to keep GxG skills readable by Claude, Codex, Gemini, and any future LLM that can read files and follow instructions.
 
 ---
 
-## The Core Problem
+## Core Principle
 
-Every major LLM has its own "instruction loading" convention:
+The repository stores only shared skill knowledge and production workflows. Assistant-specific entrypoints are local convenience files, not source-of-truth documentation.
 
-| Agent | Where it reads instructions | How skills are invoked |
-|-------|----------------------------|----------------------|
-| Claude Code | `.claude/skills/{name}/SKILL.md` loaded on `/skill-name` | `/skill-name` slash command |
-| Codex (OpenAI) | `AGENTS.md` at repo root, loaded at session start | Natural language trigger |
-| Gemini CLI | `GEMINI.md` at repo root, loaded at session start | Natural language trigger |
-| Custom agents | Any file the agent reads on boot | Depends on implementation |
-
-If skill knowledge lives inside `.claude/skills/`, Codex never sees it. If it lives in `AGENTS.md`, Claude Code won't use it when invoked. The naive solution — copy the text into both files — creates two sources of truth that drift apart.
+If a local assistant needs an adapter (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.claude/skills/`, `.agents/skills/`), that adapter should point back to shared files in this repository. The adapter itself should stay local and is ignored by Git.
 
 ---
 
 ## Principle 1: Single Source of Truth
 
-**All skill knowledge lives in a neutral folder.** LLM-specific entry points are thin adapters that reference the shared folder.
+**All skill knowledge lives in neutral folders.**
 
 ```
 repo/
-├── CLAUDE.md           ← adapter: tells Claude Code where skills live
-├── AGENTS.md           ← adapter: tells Codex/Gemini where skills live
-├── GEMINI.md           ← adapter: tells Gemini where skills live (optional)
 ├── .skills/            ← shared: orchestrators, curator workflows, config
 │   ├── config.yaml     ← single config for all skills
-│   └── {skill-name}/
+│   └── revops-curator/
 │       ├── index.md    ← entry point: routing table + overview
 │       ├── *.md        ← sub-workflows, each ≤200 lines
 │       ├── templates/
@@ -38,13 +28,10 @@ repo/
 ├── {domain}/
 │   └── {skill-slug}/
 │       └── SKILL.md    ← production domain skill, written LM-agnostically
-└── .claude/
-    └── skills/
-        └── {skill-name}/
-            └── SKILL.md  ← adapter: frontmatter + "read .skills/{skill-name}/index.md"
+└── INDEX.md            ← public skill registry
 ```
 
-**Rule:** If you edit a workflow, you edit `.skills/{skill-name}/*.md`. You never touch the adapter files for content changes.
+**Rule:** If you edit a shared workflow, edit `.skills/**/*.md`. If you edit a production skill, edit `{domain}/{skill-slug}/SKILL.md`.
 
 For production domain skills in this playbook, `{domain}/{skill-slug}/SKILL.md` is also shared source content. It must stay LM-agnostic and must not reference one vendor unless the skill itself is explicitly about that vendor.
 
@@ -54,7 +41,7 @@ For production domain skills in this playbook, `{domain}/{skill-slug}/SKILL.md` 
 
 Shared files in `.skills/` must contain zero LLM-specific syntax.
 
-### Do NOT write:
+### Do not write:
 ```markdown
 <!-- Claude-specific -->
 <claude:read file=".skills/config.yaml" />
@@ -68,7 +55,7 @@ Use the code_interpreter to run audit.py.
 Use gemini.read_file("taxonomy.md").
 ```
 
-### DO write:
+### Write:
 ```markdown
 Read the file `.skills/revops-curator/taxonomy.md`.
 Run `python .skills/revops-curator/scripts/audit.py`.
@@ -79,14 +66,16 @@ Write the result to `{domain}/{slug}/SKILL.md`.
 
 ---
 
-## Principle 3: Thin Adapters
+## Principle 3: Local Adapters Are Optional
+
+Assistant adapters are useful on a local machine, but they are not required for the public repository.
 
 An adapter's only jobs are:
 1. Register the skill with the LLM's invocation system (frontmatter, keywords)
 2. Point to the shared entry file
 3. Nothing else
 
-### Claude Code adapter (`.claude/skills/{name}/SKILL.md`):
+Example local Claude Code adapter:
 
 ```markdown
 ---
@@ -98,9 +87,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 Read `.skills/{skill-name}/index.md` for full instructions and workflow routing.
 ```
 
-That's the entire body. No duplicated content.
-
-### Codex/Gemini adapter (`AGENTS.md` / `GEMINI.md`):
+Example local root instruction:
 
 ```markdown
 ## {Skill Name}
@@ -108,7 +95,7 @@ That's the entire body. No duplicated content.
 When the user asks about {domain}: read `.skills/{skill-name}/index.md` and follow the routing table there.
 ```
 
-Two to four lines. No duplicated content.
+Keep local adapters untracked. The repository `.gitignore` excludes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/`, and `.claude/`.
 
 ---
 
@@ -221,13 +208,13 @@ updated: 2026-06-13
 
 | Anti-pattern | Why it breaks | Fix |
 |--------------|--------------|-----|
-| Skill body inside `.claude/skills/` | Codex/Gemini can't see it | Move to `.skills/`, adapter just references it |
-| Same content in CLAUDE.md and AGENTS.md | Drifts over time | Single `.skills/` source; adapters reference it |
+| Skill body inside a local adapter | Other agents cannot see it | Move the body to `.skills/` or `{domain}/{slug}/SKILL.md` |
+| Same content copied into multiple adapters | Drifts over time | Keep one shared source; adapters only reference it |
 | Hardcoded numbers in both YAML and instructions | Inconsistency | Config YAML is the single source; instructions reference it |
 | Relative paths from adapter location | Break when structure changes | Use repo-root-relative paths in shared content |
-| LLM-specific tool syntax in shared files | Other LLMs ignore/misread | Plain English imperatives only |
+| LLM-specific tool syntax in shared files | Other LLMs ignore or misread it | Plain English imperatives only |
 | Monolithic `index.md` >300 lines | Hard to navigate, slow to load | Split into named sub-files, route from index |
-| Trigger phrases only in adapter | Works in Claude Code, silent in Codex | Also put trigger phrases in `index.md` routing table |
+| Trigger phrases only in a local adapter | Public repo loses discoverability | Put trigger phrases in shared descriptions and routing tables |
 
 ---
 
@@ -235,13 +222,11 @@ updated: 2026-06-13
 
 Before marking a skill active, verify:
 
-- [ ] Knowledge is in `.skills/{name}/`, not inside `.claude/` or `AGENTS.md`
-- [ ] `.claude/skills/{name}/SKILL.md` has only frontmatter + one-line reference to `.skills/`
-- [ ] `AGENTS.md` has a 2–4 line entry pointing to `.skills/{name}/index.md`
+- [ ] Knowledge is in `.skills/` or `{domain}/{slug}/SKILL.md`, not inside a local adapter
 - [ ] `index.md` has a routing table and stays under 150 lines
 - [ ] All paths in `.skills/` files are repo-root-relative
 - [ ] No LLM-specific syntax in `.skills/` files
 - [ ] All configurable thresholds are in `.skills/config.yaml`
-- [ ] Trigger phrases appear in both adapter description and `index.md` routing table
+- [ ] Trigger phrases appear in shared descriptions and routing tables
 - [ ] All state changes write to files (nothing kept only in session memory)
-- [ ] Tested by reading the skill from a different LLM's entry point (or simulated)
+- [ ] Tested by reading the skill directly from the shared file path

@@ -46,10 +46,6 @@ Raw knowledge (meeting, doc, conversation)
 GxG RevOps Playbook/
 ├── INDEX.md                    ← Master registry
 ├── CONTRIBUTING.md             ← Standards for skill authors
-├── PROJECT_STRUCTURE.md        ← Repo architecture for humans and LLMs
-├── CLAUDE.md                   ← Claude Code adapter
-├── AGENTS.md                   ← Codex / Gemini adapter
-├── GEMINI.md                   ← Gemini adapter
 ├── _staging/                   ← Knowledge staging area
 │   ├── README.md
 │   ├── _template.md
@@ -67,19 +63,9 @@ GxG RevOps Playbook/
 │       ├── staging.md
 │       ├── readme-workflows.md
 │       └── templates/
-├── .claude/skills/
-│   ├── gxg-revops/
-│   │   └── SKILL.md            ← Thin adapter for user-facing orchestrator
-│   └── gxg-revops-curator/
-│       └── SKILL.md            ← Thin adapter for Claude Code
-├── .agents/skills/
-│   ├── gxg-revops/
-│   │   └── SKILL.md            ← Thin adapter for agent runtimes
-│   └── gxg-revops-curator/
-│       └── SKILL.md            ← Thin adapter for agent runtimes
-│
 ├── pipeline/                   ← Domain folders (see taxonomy.md)
 ├── demand-gen/
+├── design/
 ├── sales-enablement/
 ├── crm-ops/
 ├── rev-analytics/

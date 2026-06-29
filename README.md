@@ -4,10 +4,9 @@
 
 # GxG RevOps Playbook
 
-**An LM-agnostic skill library covering the full Revenue Operations stack.**
+**A minimal, LM-agnostic skill library for Revenue Operations workflows.**
 
-Each skill is a ready-to-run workflow: invoke it, get the result.
-Not instructions on how to think about RevOps — but how to execute right now.
+Each skill is a ready-to-run workflow: invoke it, follow the instructions, produce the artifact.
 
 ---
 
@@ -15,7 +14,7 @@ Not instructions on how to think about RevOps — but how to execute right now.
 
 - **Speed** — standard RevOps tasks solved in a single skill call, no prompt engineering required
 - **Consistent standard** — everyone on the team works from the same GxG approach
-- **Living knowledge base** — staging area for domain knowledge that hasn't become a skill yet
+- **Clean lifecycle** — unfinished knowledge stays in `_staging/` until it is ready
 - **Evolving** — starting with sales-enablement, expanding to cover the full RevOps stack
 
 ---
@@ -29,7 +28,7 @@ gxg-revops
 
 It routes RevOps requests to the right production skill.
 
-**2.** Or call an active skill directly:
+**2.** Or open an active skill directly:
 ```
 /writing-business-cases
 /optimizing-linkedin-profile
@@ -41,7 +40,7 @@ It routes RevOps requests to the right production skill.
 /auditing-content-quality
 ```
 
-**3.** Use the curator only for maintaining the library:
+**3.** Use the curator workflow only for maintaining the library:
 ```
 /gxg-revops-curator — I need a skill for churn analysis, what's in the playbook?
 ```
@@ -92,14 +91,8 @@ GxG RevOps Playbook/
 ├── README.md               ← you are here
 ├── INDEX.md                ← full registry of all skills
 ├── CONTRIBUTING.md         ← how to add or improve a skill
-├── _staging/               ← raw knowledge → future skills
+├── _staging/               ← lightweight notes before promotion
 ├── .skills/                ← shared LM-agnostic orchestrators and curator workflows
-├── .claude/skills/
-│   ├── gxg-revops/         ← thin Claude adapter for the user-facing orchestrator
-│   └── gxg-revops-curator/ ← thin Claude adapter for maintaining this repo
-├── .agents/skills/
-│   ├── gxg-revops/         ← thin agent adapter for the user-facing orchestrator
-│   └── gxg-revops-curator/ ← thin agent adapter for maintaining this repo
 ├── demand-gen/             ← content-led demand generation skills
 ├── design/                 ← design-context skills
 └── sales-enablement/       ← active domain with production skills
@@ -109,7 +102,6 @@ Source of truth:
 
 - `.skills/` contains shared LM-agnostic orchestrator and curator logic.
 - `{domain}/{skill-slug}/SKILL.md` contains production skill entry points.
-- `.claude/skills/` and `.agents/skills/` are adapter folders only.
 - `INDEX.md` is the master registry of active and deprecated skills.
 - `.skills/config.yaml` and `.skills/revops-curator/taxonomy.md` define domains, coverage targets, tags, and quality gates.
 
@@ -133,19 +125,6 @@ To import an external skill from a URL or file and normalize it into this playbo
 ```
 /gxg-revops-curator — onboard this skill: [URL or file path]
 ```
-
----
-
-## LM-Agnostic Architecture
-
-This repo uses a single-source-of-truth pattern:
-
-- Shared orchestrator logic lives in `.skills/revops/index.md`.
-- Shared curator logic lives in `.skills/revops-curator/`.
-- Production domain skills live in `{domain}/{skill-slug}/SKILL.md`.
-- `.claude/skills/` and `.agents/skills/` are adapters. They point to shared instructions and should not duplicate workflow logic.
-
-See `.skills/MULTI_LLM_SKILLS_GUIDE.md` before changing architecture.
 
 ---
 

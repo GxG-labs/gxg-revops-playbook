@@ -40,11 +40,6 @@ Do not invent a skill that is not in `INDEX.md` or the domain folders.
 This repository uses a master-skill pattern adapted from GTM skill libraries:
 
 ```text
-Vendor adapters
-  .claude/skills/gxg-revops/SKILL.md
-  .agents/skills/gxg-revops/SKILL.md
-        |
-        v
 Shared orchestrator
   .skills/revops/index.md
         |
@@ -59,7 +54,7 @@ Supporting docs/templates/scripts
   {domain}/{skill-slug}/scripts/
 ```
 
-The orchestrator is LM-agnostic. It uses repo-root-relative paths and plain instructions rather than Claude-, Codex-, or Gemini-specific tool syntax.
+The orchestrator is LM-agnostic. It uses repo-root-relative paths and plain instructions rather than vendor-specific tool syntax.
 
 ---
 
@@ -67,7 +62,15 @@ The orchestrator is LM-agnostic. It uses repo-root-relative paths and plain inst
 
 | Skill | Domain | Use when |
 |-------|--------|----------|
+| `researching-content` | `demand-gen` | The user needs a research brief for a Russian SEO/AEO/GEO article. |
+| `architecting-articles` | `demand-gen` | The user needs a GxG-style article outline. |
+| `writing-articles` | `demand-gen` | The user needs a Russian long-form article draft. |
+| `optimizing-seo-aeo-geo-content` | `demand-gen` | The user needs SEO/AEO/GEO editing for an article draft. |
+| `auditing-content-quality` | `demand-gen` | The user needs a final publication-readiness audit. |
 | `writing-business-cases` | `sales-enablement` | The user needs a business case, case study, success story, proof-of-value narrative, or ROI story. |
+| `optimizing-linkedin-profile` | `sales-enablement` | The user needs LinkedIn profile positioning or rewrite support. |
+| `facilitating-brainstorming` | `sales-enablement` | The user needs a structured brainstorming session. |
+| `extracting-design-context` | `design` | The user needs design DNA extracted from screenshots or a URL. |
 
 For the authoritative list, read `INDEX.md`.
 

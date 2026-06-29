@@ -8,3 +8,8 @@ _input/
 AGENTS.md
 CLAUDE.md
 GEMINI.md
+
+# Local assistant and workspace tooling
+.agents/
+.claude/
+.lanes/
