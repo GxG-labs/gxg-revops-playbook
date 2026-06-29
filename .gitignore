@@ -3,3 +3,8 @@
 
 # Local inbox for skill intake and processing
 _input/
+
+# Local assistant entrypoints
+AGENTS.md
+CLAUDE.md
+GEMINI.md

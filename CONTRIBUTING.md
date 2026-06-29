@@ -6,7 +6,7 @@ This document defines the standards every skill in the playbook must meet. The `
 
 ## Before You Start
 
-1. Check `PROJECT.md` — does this belong in the collection?
+1. Check `README.md` §What Belongs Here — does this belong in the collection?
 2. Check `INDEX.md` — does a skill for this already exist?
 3. If yes: improve the existing skill instead of creating a duplicate.
 4. If no: proceed below.
