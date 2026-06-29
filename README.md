@@ -1,5 +1,5 @@
-![Skills](https://img.shields.io/badge/skills-3%20active-brightgreen)
-![Domains](https://img.shields.io/badge/domains-1%20active-blue)
+![Skills](https://img.shields.io/badge/skills-9%20active-brightgreen)
+![Domains](https://img.shields.io/badge/domains-3%20active-blue)
 ![Updated](https://img.shields.io/badge/updated-June%202026-lightgrey)
 
 # GxG RevOps Playbook
@@ -36,6 +36,11 @@ It routes RevOps requests to the right production skill.
 /writing-business-cases
 /optimizing-linkedin-profile
 /facilitating-brainstorming
+/researching-content
+/architecting-articles
+/writing-articles
+/optimizing-seo-aeo-geo-content
+/auditing-content-quality
 ```
 
 **3.** Use the curator only for maintaining the library:
@@ -49,7 +54,9 @@ It routes RevOps requests to the right production skill.
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
+| [demand-gen](./demand-gen/) | 5/5 | Content-led demand generation, Russian SEO/AEO/GEO article workflows, research, writing, optimization, and audit |
 | [sales-enablement](./sales-enablement/) | 3/7 | Playbooks, battle cards, objection handling, brainstorming, LinkedIn optimization |
+| [design](./design/) | 1/5 | Design DNA extraction from screenshots/URLs — tokens, style, visual effects |
 
 ---
 
@@ -70,6 +77,7 @@ GxG RevOps Playbook/
 ├── .agents/skills/
 │   ├── gxg-revops/         ← thin agent adapter for the user-facing orchestrator
 │   └── gxg-revops-curator/ ← thin agent adapter for maintaining this repo
+├── demand-gen/             ← content-led demand generation skills
 └── sales-enablement/       ← active domain with production skills
 ```
 

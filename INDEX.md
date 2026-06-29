@@ -2,9 +2,9 @@
 
 > **Auto-maintained by `gxg-revops-curator` skill.** Run `/gxg-revops-curator` and say "update index" to refresh.
 
-**Last updated:** 2026-06-17
-**Total skills:** 4 active / 51 target
-**Overall coverage:** 8%
+**Last updated:** 2026-06-29
+**Total skills:** 9 active / 56 target
+**Overall coverage:** 16%
 
 ---
 
@@ -13,16 +13,17 @@
 | Domain | Active | Target | Coverage |
 |--------|--------|--------|----------|
 | [pipeline](#pipeline) | 0 | 6 | 0% |
-| [demand-gen](#demand-gen) | 0 | 5 | 0% |
+| [demand-gen](#demand-gen) | 5 | 5 | 100% |
 | [sales-enablement](#sales-enablement) | 3 | 7 | 43% |
 | [crm-ops](#crm-ops) | 0 | 6 | 0% |
 | [rev-analytics](#rev-analytics) | 0 | 5 | 0% |
 | [cs-ops](#cs-ops) | 0 | 5 | 0% |
-| [rev-tech](#rev-tech) | 1 | 4 | 25% |
+| [rev-tech](#rev-tech) | 0 | 4 | 0% |
 | [pricing-packaging](#pricing-packaging) | 0 | 4 | 0% |
 | [territory-quota](#territory-quota) | 0 | 4 | 0% |
 | [mktg-ops](#mktg-ops) | 0 | 5 | 0% |
-| **TOTAL** | **4** | **51** | **8%** |
+| [design](#design) | 1 | 5 | 20% |
+| **TOTAL** | **9** | **56** | **16%** |
 
 ---
 
@@ -38,11 +39,15 @@
 
 ## Demand Generation
 
-*Skills for ICP definition, lead scoring, MQL/SQL criteria, ABM, and inbound/outbound strategy.*
+*Skills for ICP definition, lead scoring, MQL/SQL criteria, ABM, inbound/outbound strategy, and content-led demand generation.*
 
 | Skill | Status | Tags | Description |
 |-------|--------|------|-------------|
-| *(no active skills yet)* | | | |
+| [architecting-articles](demand-gen/architecting-articles/SKILL.md) | active | #template #process #playbook #p1 | Designs GxG-style Russian long-form article outlines from research briefs |
+| [auditing-content-quality](demand-gen/auditing-content-quality/SKILL.md) | active | #analysis #process #reporting #p1 | Audits Russian SEO/AEO/GEO articles for publication readiness and factual safety |
+| [optimizing-seo-aeo-geo-content](demand-gen/optimizing-seo-aeo-geo-content/SKILL.md) | active | #process #analysis #playbook #p1 | Edits Russian article drafts for SEO, AEO, GEO, metadata, FAQ, and extractable structure |
+| [researching-content](demand-gen/researching-content/SKILL.md) | active | #analysis #process #playbook #p1 | Builds research briefs for Russian SEO/AEO/GEO articles before outlining or drafting |
+| [writing-articles](demand-gen/writing-articles/SKILL.md) | active | #template #playbook #process #p1 | Writes Russian long-form article drafts in the GxG voice from approved outlines |
 
 ---
 
@@ -94,7 +99,7 @@
 
 | Skill | Status | Tags | Description |
 |-------|--------|------|-------------|
-| [maintaining-llms-txt](rev-tech/maintaining-llms-txt/SKILL.md) | active | #process #automation #p2 | Maintains repository-level llms.txt navigation so LLM agents can understand project structure and key docs |
+| *(no active skills yet)* | | | |
 
 ---
 
@@ -125,6 +130,16 @@
 | Skill | Status | Tags | Description |
 |-------|--------|------|-------------|
 | *(no active skills yet)* | | | |
+
+---
+
+## Design
+
+*Non-RevOps branch. Skills for extracting and consolidating a product's design language — tokens, components, patterns — so AI and design agents can build against it.*
+
+| Skill | Status | Tags | Description |
+|-------|--------|------|-------------|
+| [extracting-design-context](design/extracting-design-context/SKILL.md) | active | #framework #process #template #analysis #p1 | Extracts a product's design DNA — tokens, qualitative style, and visual effects — from screenshots (or a URL) into one structured design-context profile |
 
 ---
 

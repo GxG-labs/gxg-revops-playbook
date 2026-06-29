@@ -54,6 +54,10 @@ Sub-files (all in `.skills/revops-curator/`):
 
 Located at `sales-enablement/writing-business-cases/SKILL.md`. Activate when user asks to write, structure, or improve a business case document.
 
+## Extracting-Design-Context Skill
+
+Located at `design/extracting-design-context/SKILL.md` (Design branch). Activate when user provides screenshots or a URL of a reference UI and wants its design DNA extracted — measurable tokens, qualitative style, and visual effects — into a structured design-context profile, or when user mentions "design DNA", "extract design style", "design tokens from screenshot", "analyze design", "style profile", "reverse-engineer UI", "visual effects analysis".
+
 ---
 
 ## General Conventions

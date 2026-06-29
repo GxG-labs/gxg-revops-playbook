@@ -55,9 +55,14 @@ domains:
     folder: mktg-ops
     target_skills: 5
     priority_skills: [routing-leads, running-campaigns, attributing-revenue]
+  design:
+    name: "Design"
+    folder: design
+    target_skills: 5
+    priority_skills: [extracting-design-context]
 
 settings:
-  total_target_skills: 51
+  total_target_skills: 56
   stale_threshold_days: 90
   max_skill_lines: 500
   max_description_chars: 1024

@@ -8,7 +8,7 @@ Coverage targets are also in `.skills/config.yaml` — that file is the machine-
 
 ## Domains
 
-Ten primary domains cover the full RevOps stack. Each maps to a top-level folder.
+Ten primary domains cover the full RevOps stack, plus one non-RevOps branch for design context. Each maps to a top-level folder.
 
 | Folder | Domain | Scope |
 |--------|--------|-------|
@@ -22,6 +22,7 @@ Ten primary domains cover the full RevOps stack. Each maps to a top-level folder
 | `pricing-packaging/` | Pricing & Packaging | CPQ setup, pricing tiers, discount governance, deal desk process, packaging decisions |
 | `territory-quota/` | Territory & Quota | Territory design, quota setting, ramp plans, performance management, comp plans |
 | `mktg-ops/` | Marketing Operations | Campaign operations, marketing automation, lead routing, attribution, MOps stack |
+| `design/` | Design *(non-RevOps branch)* | Design context — extracting and consolidating a product's design language (tokens, components, patterns) for AI/design agents |
 
 ---
 
@@ -50,8 +51,9 @@ Each `{domain}/README.md` must contain:
 | `pricing-packaging` | 4 | governing-discounts, designing-tiers |
 | `territory-quota` | 4 | designing-territories, setting-quotas |
 | `mktg-ops` | 5 | routing-leads, running-campaigns, attributing-revenue |
+| `design` | 5 | extracting-design-context |
 
-Total target: **51 active skills** covering the full RevOps stack.
+Total target: **56 active skills** — 51 covering the full RevOps stack + 5 in the Design branch.
 
 ---
 
@@ -95,7 +97,7 @@ Tags are declared in frontmatter as `tags: [tag1, tag2]`. Every skill must have 
 
 ### Domain Tags (use the folder name)
 
-`pipeline`, `demand-gen`, `sales-enablement`, `crm-ops`, `rev-analytics`, `cs-ops`, `rev-tech`, `pricing-packaging`, `territory-quota`, `mktg-ops`
+`pipeline`, `demand-gen`, `sales-enablement`, `crm-ops`, `rev-analytics`, `cs-ops`, `rev-tech`, `pricing-packaging`, `territory-quota`, `mktg-ops`, `design`
 
 ### Type Tags
 
